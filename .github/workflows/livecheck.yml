@@ -1,0 +1,47 @@
+name: Livecheck and bump
+
+on:
+    schedule:
+        - cron: "30 */4 * * *"
+    workflow_dispatch:
+
+jobs:
+    livecheck:
+        runs-on: ubuntu-22.04
+        permissions:
+            contents: write
+            pull-requests: write
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: Homebrew/actions/setup-homebrew@master
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Run livecheck
+              run: |
+                  brew livecheck --tap=$GITHUB_REPOSITORY --json > livecheck.json
+                  cat livecheck.json
+
+            - name: Bump outdated formulae
+              run: |
+                  jq -c '.[] | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
+                    name=$(echo "$formula" | jq -r .formula)
+                    new_ver=$(echo "$formula" | jq -r .version.latest)
+                    path="Formula/${name}.rb"
+                    branch="${name}-${new_ver}"
+
+                    git fetch origin
+                    git checkout -b "$branch" origin/main
+
+                    brew bump-formula-pr \
+                      --no-audit --no-browse --force \
+                      --version="$new_ver" \
+                      "$path"
+
+                    git push origin "$branch"
+                    gh pr create --fill --head "$branch" --base main \
+                      --title "Update ${name} to ${new_ver}"
+                  done
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -54,3 +54,9 @@ jobs:
               with:
                   name: bottles_linux
                   path: "*.bottle.*"
+
+            - name: Label successful PR
+              if: github.event_name == 'pull_request' && success()
+              run: gh pr edit ${{ github.event.pull_request.number }} --add-label "pr-pull"
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
