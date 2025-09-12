@@ -11,6 +11,12 @@ class Runitor < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "ae60bf0abd5ddc62fafab3658cd0a2f52641f618e01a7311d9b5cf15d9dbaf07"
+  end
+
   depends_on "go" => :build
   depends_on :linux
 
