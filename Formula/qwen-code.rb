@@ -5,8 +5,8 @@ class QwenCode < Formula
   sha256 "88a561e5882793c52ec6e6946eb736b418501cacbeceb47120ce25f87db22894"
   license "Apache-2.0"
 
-  depends_on "node"
   depends_on :linux
+  depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
