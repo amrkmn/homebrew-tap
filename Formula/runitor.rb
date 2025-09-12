@@ -11,6 +11,7 @@ class Runitor < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
+  depends_on :linux
   depends_on "go" => :build
 
   def install
