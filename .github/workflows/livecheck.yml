@@ -20,14 +20,14 @@ jobs:
 
             - name: Run livecheck
               run: |
-                  brew livecheck --tap=$GITHUB_REPOSITORY --json > livecheck.json
+                  brew livecheck --tap="$GITHUB_REPOSITORY" --json > livecheck.json
                   cat livecheck.json
 
             - name: Bump outdated formulae
               run: |
                   jq -c '.[] | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
-                    name=$(echo "$formula" | jq -r .formula)
-                    new_ver=$(echo "$formula" | jq -r .version.latest)
+                    name="$(echo "$formula" | jq -r .formula)"
+                    new_ver="$(echo "$formula" | jq -r .version.latest)"
                     path="Formula/${name}.rb"
                     branch="${name}-${new_ver}"
 
