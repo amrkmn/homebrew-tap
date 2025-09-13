@@ -26,21 +26,20 @@ jobs:
             - name: Bump outdated formulae
               run: |
                   jq -c '.[] | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
-                    name="$(echo "$formula" | jq -r .formula)"
-                    new_ver="$(echo "$formula" | jq -r .version.latest)"
-                    path="Formula/${name}.rb"
-                    branch="${name}-${new_ver}"
+                  name="$(echo "$formula" | jq -r .formula)"
+                  new_ver="$(echo "$formula" | jq -r .version.latest)"
+                  branch="${name}-${new_ver}"
 
-                    git fetch origin
-                    git checkout -b "$branch" origin/main
+                  git fetch origin
+                  git checkout -b "$branch" origin/main
 
-                    brew bump-formula-pr \
+                  brew bump-formula-pr \
                       --no-audit --no-browse --force \
                       --version="$new_ver" \
-                      "$path"
+                      "amrkmn/tap/${name}"
 
-                    git push origin "$branch"
-                    gh pr create --fill --head "$branch" --base main \
+                  git push origin "$branch"
+                  gh pr create --fill --head "$branch" --base main \
                       --title "Update ${name} to ${new_ver}"
                   done
               env:
