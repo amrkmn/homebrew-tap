@@ -1,9 +1,9 @@
-name: brew livecheck, brew bump-formula-pr
+name: brew livecheck
 
 on:
-    schedule:
-        - cron: "30 */4 * * *"
     workflow_dispatch:
+    schedule:
+        - cron: "20 */4 * * *"
 
 jobs:
     livecheck:
