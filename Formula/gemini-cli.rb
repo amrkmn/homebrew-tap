@@ -6,7 +6,7 @@ class GeminiCli < Formula
   license "Apache-2.0"
 
   bottle do
-    root_url "https://ghcr.io/v2/amrkmn/tap"
+    root_url "https://noz.one/v2/pkgs/tap"
     sha256 cellar: :any_skip_relocation, x86_64_linux: "0775727e3d0bac6d644c94fd404823aeea77ca1b1054f6c1c339732b893783d7"
   end
 

@@ -6,7 +6,7 @@ class QwenCode < Formula
   license "Apache-2.0"
 
   bottle do
-    root_url "https://ghcr.io/v2/amrkmn/tap"
+    root_url "https://noz.one/v2/pkgs/tap"
     sha256 cellar: :any_skip_relocation, x86_64_linux: "bc73ae41351c0334028341e9ac3906dc730bc418313c9489f791cd509792bc07"
   end
 

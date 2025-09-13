@@ -34,16 +34,16 @@ jobs:
             - run: brew test-bot --only-setup
 
             - run: brew test-bot --only-tap-syntax
-            - name: Base64-encode GH_TOKEN for HOMEBREW_DOCKER_REGISTRY_TOKEN
+            - name: Base64-encode FORGEJO_PACKAGE_TOKEN for HOMEBREW_DOCKER_REGISTRY_TOKEN
               id: base64-encode
               if: github.event_name == 'pull_request'
               env:
-                  TOKEN: ${{ secrets.GH_TOKEN }}
+                  TOKEN: ${{ secrets.FORGEJO_PACKAGE_TOKEN }}
               run: |
                   base64_token=$(echo -n "${TOKEN}" | base64 | tr -d "\n")
                   echo "::add-mask::${base64_token}"
                   echo "token=${base64_token}" >> "${GITHUB_OUTPUT}"
-            - run: brew test-bot --only-formulae --root-url=https://ghcr.io/v2/amrkmn/tap
+            - run: brew test-bot --only-formulae --root-url=https://noz.one/v2/pkgs/tap
               if: github.event_name == 'pull_request'
               env:
                   HOMEBREW_DOCKER_REGISTRY_TOKEN: ${{ steps.base64-encode.outputs.token }}
