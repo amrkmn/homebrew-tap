@@ -8,19 +8,12 @@ on:
 jobs:
     livecheck:
         runs-on: ubuntu-22.04
-        permissions:
-            actions: read
-            checks: read
-            contents: write
-            issues: read
-            packages: write
-            pull-requests: write
         steps:
             - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
             - uses: Homebrew/actions/setup-homebrew@master
               with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
+                  token: ${{ secrets.GH_TOKEN }}
 
             - name: Run livecheck
               run: |
@@ -46,4 +39,4 @@ jobs:
                       --title "Update ${name} to ${new_ver}"
                   done
               env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
