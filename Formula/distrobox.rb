@@ -7,7 +7,7 @@ class Distrobox < Formula
   head "https://github.com/89luca89/distrobox.git", branch: "main"
 
   bottle do
-    root_url "https://noz.one/v2/pkgs/tap"
+    root_url "https://ghcr.io/v2/amrkmn/tap"
     sha256 cellar: :any_skip_relocation, x86_64_linux: "4619885071d05ef10c73a63e75f949c3fa2779987207764700b0f5b8d2f7bda7"
   end
 

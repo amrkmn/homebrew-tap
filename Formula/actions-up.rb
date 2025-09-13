@@ -6,7 +6,7 @@ class ActionsUp < Formula
   license "MIT"
 
   bottle do
-    root_url "https://noz.one/v2/pkgs/tap"
+    root_url "https://ghcr.io/v2/amrkmn/tap"
     sha256 cellar: :any_skip_relocation, x86_64_linux: "6071519c3a8d885a03c8185e51c5ac56b385f15585a05677d25e7109444645b5"
   end
 
