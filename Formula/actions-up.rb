@@ -5,6 +5,11 @@ class ActionsUp < Formula
   sha256 "de8c6c5d72d2d545edadfc2cf9f5b34a4866ea7430636b058bbfa238903662e4"
   license "MIT"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "6cf3f9aec52450b418c85ec4dcca2d0cc3c9bc9b94faa48311f6f6525e840330"
+  end
+
   depends_on :linux
   depends_on "node"
 
