@@ -8,35 +8,49 @@ on:
 jobs:
     livecheck:
         runs-on: ubuntu-22.04
+        permissions:
+            contents: write
+            pull-requests: write
         steps:
-            - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+            - uses: actions/checkout@v4
 
-            - uses: Homebrew/actions/setup-homebrew@master
+            - name: Set up Homebrew
+              id: set-up-homebrew
+              uses: Homebrew/actions/setup-homebrew@main
               with:
                   token: ${{ secrets.GH_TOKEN }}
+
+            - name: Cache Homebrew Bundler RubyGems
+              uses: actions/cache@v4
+              with:
+                  path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+                  key: linux-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+                  restore-keys: linux-rubygems-
 
             - name: Run livecheck
               run: |
                   brew livecheck --tap="$GITHUB_REPOSITORY" --json > livecheck.json
+                  jq -c '.[] | select(.version.latest != .version.current)' livecheck.json
 
             - name: Bump outdated formulae
               run: |
                   jq -c '.[] | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
-                  name="$(echo "$formula" | jq -r .formula)"
-                  new_ver="$(echo "$formula" | jq -r .version.latest)"
-                  branch="${name}-${new_ver}"
+                    name="$(echo "$formula" | jq -r .formula)"
+                    new_ver="$(echo "$formula" | jq -r .version.latest)"
+                    branch="${name}-${new_ver}"
 
-                  git fetch origin
-                  git checkout -b "$branch" origin/main
+                    git fetch origin
+                    git checkout -b "$branch" origin/main
 
-                  brew bump-formula-pr \
+                    brew bump-formula-pr \
                       --no-audit --no-browse --force \
                       --version="$new_ver" \
                       "amrkmn/tap/${name}"
 
-                  git push origin "$branch"
-                  gh pr create --fill --head "$branch" --base main \
+                    git push origin "$branch"
+                    gh pr create --fill --head "$branch" --base main \
                       --title "Update ${name} to ${new_ver}"
                   done
               env:
                   HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
