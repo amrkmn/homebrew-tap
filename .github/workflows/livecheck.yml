@@ -1,4 +1,4 @@
-name: brew livecheck and brew bump-formala-pr
+name: brew livecheck, brew bump-formula-pr
 
 on:
     schedule:
