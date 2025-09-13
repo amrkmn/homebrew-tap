@@ -13,9 +13,7 @@ jobs:
             actions: read
             checks: read
             contents: write
-            issues: read
             packages: write
-            pull-requests: write
         steps:
             - name: Set up Homebrew
               uses: Homebrew/actions/setup-homebrew@main
@@ -28,7 +26,7 @@ jobs:
             - name: Pull bottles
               env:
                   HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
-                  HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ secrets.GH_TOKEN }}
+                  HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   HOMEBREW_GITHUB_PACKAGES_USER: ${{ github.repository_owner }}
                   PULL_REQUEST: ${{ github.event.pull_request.number }}
               run: brew pr-pull --debug --tap="$GITHUB_REPOSITORY" "$PULL_REQUEST"
