@@ -29,7 +29,7 @@ class Bun < Formula
     end
 
     Dir["#{libexec}/lib/node_modules/bun/node_modules/@oven/*"].each do |dir|
-      FileUtils.rm_rf(dir) unless dir.end_with?(keep)
+      rm_r(dir) unless dir.end_with?(keep)
     end
   end
 
