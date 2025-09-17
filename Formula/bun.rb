@@ -15,6 +15,18 @@ class Bun < Formula
     generate_completions_from_executable(bin/"bun", "completions")
   end
 
+  def post_install
+    keep = if Hardware::CPU.avx2?
+      "bun-linux-x64"
+    else
+      "bun-linux-x64-baseline"
+    end
+
+    Dir["#{libexec}/lib/node_modules/bun/node_modules/@oven/*"].each do |dir|
+      rm_r(dir) unless dir.end_with?(keep)
+    end
+  end
+
   test do
     assert_match version.to_s, shell_output("#{bin}/bun --version")
   end
