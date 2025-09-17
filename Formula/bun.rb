@@ -16,6 +16,7 @@ class Bun < Formula
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
+    ENV["BUN_INSTALL"] = bin.to_s
     generate_completions_from_executable(bin/"bun", "completions")
   end
 
