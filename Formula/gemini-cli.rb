@@ -5,6 +5,10 @@ class GeminiCli < Formula
   sha256 "4264af52ff410840e81092de13efbb00b3ffd5eef5549919c159fad1d392d906"
   license "Apache-2.0"
 
+  livecheck do
+    skip "Stop updating for now"
+  end
+
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
     sha256 cellar: :any_skip_relocation, x86_64_linux: "0775727e3d0bac6d644c94fd404823aeea77ca1b1054f6c1c339732b893783d7"

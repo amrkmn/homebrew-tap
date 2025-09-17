@@ -30,7 +30,7 @@ jobs:
             - name: Run livecheck
               run: |
                   brew livecheck --tap="$GITHUB_REPOSITORY" --json > livecheck.json
-                  jq -c '.[] | select(.version.latest != .version.current)' livecheck.json
+                  jq -c '.[] | select(.status != "skipped") | select(.version.latest != .version.current)' livecheck.json
 
             - name: Set up git user
               run: |
@@ -39,7 +39,7 @@ jobs:
 
             - name: Bump outdated formulae
               run: |
-                  jq -c '.[] | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
+                  jq -c '.[] | select(.status != "skipped") | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
                   name="$(echo "$formula" | jq -r .formula)"
                   new_ver="$(echo "$formula" | jq -r .version.latest)"
 
