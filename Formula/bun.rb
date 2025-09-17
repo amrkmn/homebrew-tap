@@ -2,7 +2,7 @@ class Bun < Formula
   desc "Blazing fast JS runtime, bundler, tester & package manager in one"
   homepage "https://bun.sh/"
   url "https://registry.npmjs.org/bun/-/bun-1.2.22.tgz"
-  sha256 "4cc42e5ef2fcfd564352d613ea639282c930f81230de03227765f79735c36e17"
+  sha256 "4fa9880e1d552af2348d9b35024a0627f6ef4289bd272dd7dcfe4cbe1b010785"
   license "MIT"
 
   depends_on :linux
