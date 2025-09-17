@@ -20,25 +20,6 @@ class Bun < Formula
     generate_completions_from_executable(bin/"bun", "completions")
   end
 
-  def post_install
-    avx2 = Hardware::CPU.features.include?(:avx2)
-    is_musl = File.exist?("/etc/alpine-release")
-
-    keep = if avx2 && is_musl
-      "bun-linux-x64-musl"
-    elsif avx2 && !is_musl
-      "bun-linux-x64"
-    elsif !avx2 && is_musl
-      "bun-linux-x64-musl-baseline"
-    else
-      "bun-linux-x64-baseline"
-    end
-
-    Dir["#{libexec}/lib/node_modules/bun/node_modules/@oven/*"].each do |dir|
-      rm_r(dir) unless dir.end_with?(keep)
-    end
-  end
-
   test do
     assert_match version.to_s, shell_output("#{bin}/bun --version")
   end
