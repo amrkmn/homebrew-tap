@@ -16,14 +16,8 @@ class Bun < Formula
   end
 
   def post_install
-    keep = if Hardware::CPU.avx2?
-      "bun-linux-x64"
-    else
-      "bun-linux-x64-baseline"
-    end
-
     Dir["#{libexec}/lib/node_modules/bun/node_modules/@oven/*"].each do |dir|
-      rm_r(dir) unless dir.end_with?(keep)
+      rm_r(dir) unless dir.include?("musl")
     end
   end
 
