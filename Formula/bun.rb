@@ -1,6 +1,3 @@
-# Documentation: https://docs.brew.sh/Formula-Cookbook
-#                https://rubydoc.brew.sh/Formula
-# PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 class Bun < Formula
   desc "Blazing fast JS runtime, bundler, tester & package manager in one"
   homepage "https://bun.sh/"
