@@ -5,6 +5,11 @@ class Age < Formula
   sha256 "93bd89a16c74949ee7c69ef580d8e4cf5ce03e7d9c461b68cf1ace3e4017eef5"
   license "BSD-3-Clause"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "a5818c0e692453c346c5a728e0fed44de47285e89a76180e25f731aeaf8745ba"
+  end
+
   depends_on "go" => :build
   depends_on :linux
 
