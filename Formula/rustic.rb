@@ -5,6 +5,11 @@ class Rustic < Formula
   sha256 "d67cc86a0e589788c74bee8ab86fd9637b64253751c03fb35a16455457a4684b"
   license "Apache-2.0"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe: "e6284fa77f590ab7ccd09ffc67b7cdc20d0420ac0ff105d9196cd27b17b8c4f8"
+  end
+
   depends_on "rust" => :build
 
   def install
