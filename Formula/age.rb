@@ -11,7 +11,6 @@ class Age < Formula
   end
 
   depends_on "go" => :build
-  depends_on :linux
 
   def install
     ldflags = "-s -w -X main.Version=v#{version}"

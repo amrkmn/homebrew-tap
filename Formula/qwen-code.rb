@@ -10,7 +10,6 @@ class QwenCode < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "bc73ae41351c0334028341e9ac3906dc730bc418313c9489f791cd509792bc07"
   end
 
-  depends_on :linux
   depends_on "node"
 
   def install

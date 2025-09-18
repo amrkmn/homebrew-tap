@@ -10,7 +10,6 @@ class ActionsUp < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "21061ccf6a07874651a6339583e5540e2a4cb1e9b26ea45c6f38e3a5f5d4bfbb"
   end
 
-  depends_on :linux
   depends_on "node"
 
   def install

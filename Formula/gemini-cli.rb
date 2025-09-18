@@ -10,7 +10,6 @@ class GeminiCli < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "b7df168eaf7277edfc46361c2e90bcbbe65e16027624dc52cbddf2edb74182a0"
   end
 
-  depends_on :linux
   depends_on "node"
 
   def install

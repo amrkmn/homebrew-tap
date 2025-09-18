@@ -10,7 +10,6 @@ class Crush < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "3f34c55912fbf07c19db2b53c7ef9ec129b0d7ddaae19e368d11a72bd5960b65"
   end
 
-  depends_on :linux
   depends_on "node"
 
   def install

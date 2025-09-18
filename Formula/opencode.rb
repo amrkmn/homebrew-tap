@@ -10,7 +10,6 @@ class Opencode < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "473890af354056063f8aae3d0fdf4bff31e7c70a1bf1271dab05c69eb9b6cb3e"
   end
 
-  depends_on :linux
   depends_on "node"
 
   def install
