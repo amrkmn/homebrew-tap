@@ -7,6 +7,11 @@ class YtDlp < Formula
   sha256 "9ce080f80b2258e872fe8a75f4707ea2c644e697477186e20b9a04d9a9ea37cf"
   license "Unlicense"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "91692449c1770b84fa383fec0946ea87151ee6da62a06f054d852aeab520f736"
+  end
+
   head do
     url "https://github.com/yt-dlp/yt-dlp.git", branch: "master"
 
