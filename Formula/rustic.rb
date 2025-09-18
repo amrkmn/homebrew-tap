@@ -1,5 +1,5 @@
 class Rustic < Formula
-  desc "rustic - fast, encrypted, and deduplicated backups powered by Rust"
+  desc "Fast, encrypted, and deduplicated backups powered by Rust"
   homepage "https://rustic.cli.rs"
   url "https://github.com/rustic-rs/rustic/archive/refs/tags/v0.10.0.tar.gz"
   sha256 "d67cc86a0e589788c74bee8ab86fd9637b64253751c03fb35a16455457a4684b"
