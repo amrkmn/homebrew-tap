@@ -55,11 +55,15 @@ jobs:
               if: always() && github.event_name == 'pull_request'
               uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
-                  name: bottles_linux
+                  name: bottles_${{ matrix.os }}
                   path: "*.bottle.*"
 
+    add-label:
+        needs: [test-bot]
+        if: github.event_name == 'pull_request' && success()
+        runs-on: ubuntu-latest
+        steps:
             - name: Add pr-pull label
-              if: github.event_name == 'pull_request' && success()
               uses: actions-ecosystem/action-add-labels@bd52874380e3909a1ac983768df6976535ece7f8 # v1.1.0
               with:
                   github_token: ${{ secrets.GH_TOKEN }}
