@@ -5,11 +5,14 @@ class QwenCode < Formula
   sha256 "439fdd35bc2f7e0cc2cc7a20f927a8184b98319e57049128f3fe4b8629c6b792"
   license "Apache-2.0"
 
+  livecheck do
+    url :homepage
+    regex(/(\d+(?:\.\d+)+)/i)
+  end
+
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256                               arm64_tahoe:   "724e7d9788fd86cad2522384392314004c86783e122d9221d1a3e9344db8fe54"
-    sha256                               arm64_sequoia: "66a284cddf9e28f2c336b3a763b45921a6075744b9339b9eeb94afa776d2a5e3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1d383ae5f6640ef341381dab602faff21c25a4cb3699b089eddd70c182c9c107"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "bc73ae41351c0334028341e9ac3906dc730bc418313c9489f791cd509792bc07"
   end
 
   depends_on "node"
