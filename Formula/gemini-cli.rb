@@ -5,6 +5,13 @@ class GeminiCli < Formula
   sha256 "4c272d3be5653bcb31ea9fbd1637c7f3f7e81da91f70b8f3e0072c1c961f57cc"
   license "Apache-2.0"
 
+  livecheck do
+    url "https://registry.npmjs.org/@google/gemini-cli/latest"
+    strategy :json do |json|
+      json["version"]
+    end
+  end
+
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
     sha256                               arm64_tahoe:   "b7480898af6d1be900f8a74a4959a5da38edee5a764ad7ba7eeda17f53bbc3d0"
