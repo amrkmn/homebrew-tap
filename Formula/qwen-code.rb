@@ -5,11 +5,6 @@ class QwenCode < Formula
   sha256 "439fdd35bc2f7e0cc2cc7a20f927a8184b98319e57049128f3fe4b8629c6b792"
   license "Apache-2.0"
 
-  livecheck do
-    url :homepage
-    regex(/(\d+(?:\.\d+)+)/i)
-  end
-
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
     rebuild 1
