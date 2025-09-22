@@ -6,6 +6,13 @@ class Restic < Formula
   license "BSD-2-Clause"
   head "https://github.com/restic/restic.git", branch: "master"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "030e7d580ea78b7a513dd3c1440374ea7192815e0516ebe70fd0c9738ceaab52"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ad760addf5b5cb45fdaf4db30d20a81f20f12198d0159ec987566ca181ca4e14"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "046ddca094edb8e543f030c2b1c171f1eb9ccd2790c57c4c3f52013a57c267b5"
+  end
+
   depends_on "go" => :build
 
   def install
