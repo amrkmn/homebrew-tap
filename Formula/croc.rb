@@ -6,6 +6,13 @@ class Croc < Formula
   license "MIT"
   head "https://github.com/schollz/croc.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bb20143db981cc2695da82cb5ea91c691720e66282ab5abfcf2d39a35bee5823"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0b2c298b5480a55036381b5c669ac50320dd7c02938f49afaa239ac3c1e22177"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9714b5800c7a3c81128130fce41da8f42c3287f995511cdd83751bdbd392b265"
+  end
+
   depends_on "go" => :build
 
   def install
