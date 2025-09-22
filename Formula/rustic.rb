@@ -4,6 +4,7 @@ class Rustic < Formula
   url "https://github.com/rustic-rs/rustic/archive/refs/tags/v0.10.0.tar.gz"
   sha256 "d67cc86a0e589788c74bee8ab86fd9637b64253751c03fb35a16455457a4684b"
   license "Apache-2.0"
+  head "https://github.com/rustic-rs/rustic.git", branch: "main"
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
