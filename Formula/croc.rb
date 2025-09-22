@@ -1,5 +1,5 @@
 class Croc < Formula
-  desc "Easily and securely send things from one computer to another :crocodile: :package:"
+  desc "Securely send things from one computer to another"
   homepage "https://schollz.com/software/croc6"
   url "https://github.com/schollz/croc/archive/refs/tags/v10.2.4.tar.gz"
   sha256 "c259c07b9da3ea39726b0c5e3f78ae66e858e1379bdb11bef93d31298e68f5fe"
