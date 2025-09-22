@@ -4,6 +4,7 @@ class Croc < Formula
   url "https://github.com/schollz/croc/archive/refs/tags/v10.2.4.tar.gz"
   sha256 "c259c07b9da3ea39726b0c5e3f78ae66e858e1379bdb11bef93d31298e68f5fe"
   license "MIT"
+  head "https://github.com/schollz/croc.git", branch: "main"
 
   depends_on "go" => :build
 
