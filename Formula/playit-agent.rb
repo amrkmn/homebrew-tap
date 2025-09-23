@@ -6,6 +6,11 @@ class PlayitAgent < Formula
   license "BSD-2-Clause"
   head "https://github.com/playit-cloud/playit-agent.git", branch: "master"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
     sha256 cellar: :any_skip_relocation, arm64_tahoe:   "cf38660fc157db0caf428656b5f7b6d8ee0f39c7b5b2d2e029972bc9a331c7f9"
