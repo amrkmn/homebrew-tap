@@ -22,6 +22,8 @@ jobs:
 
             - name: Set up git
               uses: Homebrew/actions/git-user-config@main
+              with:
+                  username: BrewTestBot
 
             - name: Pull bottles
               env:

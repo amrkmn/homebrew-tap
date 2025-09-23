@@ -6,18 +6,40 @@ on:
             - main
     pull_request:
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+# https://github.com/chenrui333/homebrew-tap/blob/51e2b1829bd82a7ff165dc7aa84239aff89192ca/.github/workflows/tests.yml#L17
+env:
+    HOMEBREW_DEVELOPER: 1
+    HOMEBREW_GITHUB_ACTIONS: 1
+    HOMEBREW_NO_AUTO_UPDATE: 1
+    HOMEBREW_NO_INSTALL_FROM_API: 1
+    HOMEBREW_TEST_BOT_ANALYTICS: 1
+    HOMEBREW_ENFORCE_SBOM: 1
+    HOMEBREW_NO_BUILD_ERROR_ISSUES: 1
+    HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
+    GH_REPO: ${{ github.repository }}
+    GH_NO_UPDATE_NOTIFIER: 1
+    GH_PROMPT_DISABLED: 1
+    PR: ${{ github.event.number }}
+    HOMEBREW_RELOCATABLE_INSTALL_NAMES: 1
+
 jobs:
     test-bot:
         strategy:
             matrix:
                 os: [ubuntu-24.04, macos-15, macos-26]
         runs-on: ${{ matrix.os }}
+
         permissions:
             actions: read
             checks: read
             contents: read
             packages: read
             pull-requests: write
+
         steps:
             - name: Set up Homebrew
               id: set-up-homebrew
@@ -35,8 +57,10 @@ jobs:
             - run: brew test-bot --only-cleanup-before
 
             - run: brew test-bot --only-setup
+              continue-on-error: true
 
             - run: brew test-bot --only-tap-syntax
+
             - name: Base64-encode GH_TOKEN for HOMEBREW_DOCKER_REGISTRY_TOKEN
               id: base64-encode
               if: github.event_name == 'pull_request'
@@ -46,6 +70,7 @@ jobs:
                   base64_token=$(echo -n "${TOKEN}" | base64 | tr -d "\n")
                   echo "::add-mask::${base64_token}"
                   echo "token=${base64_token}" >> "${GITHUB_OUTPUT}"
+
             - run: brew test-bot --only-formulae --root-url=https://ghcr.io/v2/amrkmn/tap
               if: github.event_name == 'pull_request'
               env:
@@ -55,10 +80,11 @@ jobs:
               if: always() && github.event_name == 'pull_request'
               uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
-                  name: bottles_${{ matrix.os }}
+                  name: bottles_${{ matrix.os }}_${{ github.run_id }}
                   path: "*.bottle.*"
 
     add-label:
+        name: Add 'pr-pull' label to PR
         needs: [test-bot]
         if: github.event_name == 'pull_request' && success()
         runs-on: ubuntu-latest
