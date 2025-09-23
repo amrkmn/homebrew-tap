@@ -35,7 +35,7 @@ jobs:
             - name: Get list of autobump formulae
               id: autobump
               run: |
-                  autobump_list=$(brew tap-info chenrui333/homebrew-tap --json | \
+                  autobump_list=$(brew tap-info amrkmn/tap --json | \
                     jq -c -r '.[0]["formula_names"] | join(" ")')
                   echo "autobump_list=$autobump_list" >> "$GITHUB_OUTPUT"
 
