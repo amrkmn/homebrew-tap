@@ -7,9 +7,9 @@ class Opencode < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256                               arm64_tahoe:   "85f99f0318907a374ce30ae3c307f343ec461ab566eb67e9f7b49559634b716a"
-    sha256                               arm64_sequoia: "072ed34ab28eb8d4179a7a96e3cbbaf88bc3e93a04579260f2ab9a241089d502"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4b90aaaeafeddf337a340c84c445c5336d17eaea56843cb20a727d85dd11e990"
+    sha256                               arm64_tahoe:   "93b748b6d197a27735e625f7dc68fc031037b3121216c8cf3f1ddb723f4f8c0a"
+    sha256                               arm64_sequoia: "ba5e30bd58f3f5d2e3862fea75e5a62c5f0a68006961fd31ccb658f02fd4ec5d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a882667ad91a210deec5a08d2ae8592f2b317d1e55d5f48cda80f841c5fc84ba"
   end
 
   depends_on "node"
