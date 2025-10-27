@@ -17,6 +17,9 @@ class QwenCode < Formula
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
+
+    # Remove incompatible pre-built binaries
+    rm_r(libexec/"lib/node_modules/@qwen-code/qwen-code/vendor/ripgrep")
   end
 
   test do
