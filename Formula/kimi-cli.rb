@@ -7,6 +7,13 @@ class KimiCli < Formula
   sha256 "eb02c0858d1c62f0f771df5ef29601e8c1b5908b50105881e0cb320bf6067d91"
   head "https://github.com/MoonshotAI/kimi-cli.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any,                 arm64_tahoe:   "da8f76fb2a812e6b696b4ef2811fad3bfccd7d6dd1e40f63bf370a473c4a030b"
+    sha256 cellar: :any,                 arm64_sequoia: "aec5995cab779d95ad652a8f494f5e4053250ac4366a8debee03d52ea4ff1075"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bca85b499e1a4df0ea12f686f10f3374193a889b8f4017b129a540746ce54e7a"
+  end
+
   depends_on "pkgconf" => :build
   depends_on "rust" => :build # for jiter
   depends_on "certifi" => :no_linkage
