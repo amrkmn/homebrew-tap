@@ -23,8 +23,7 @@ class PlayitAgent < Formula
 
   def install
     system "cargo", "install", *std_cargo_args(path: "packages/agent_cli")
-
-    bin.install_symlink "playit-cli" => "playit"
+    mv bin/"playit-cli", bin/"playit"
   end
 
   test do
