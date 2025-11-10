@@ -10,9 +10,9 @@ class KimiCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any,                 arm64_tahoe:   "da8f76fb2a812e6b696b4ef2811fad3bfccd7d6dd1e40f63bf370a473c4a030b"
-    sha256 cellar: :any,                 arm64_sequoia: "aec5995cab779d95ad652a8f494f5e4053250ac4366a8debee03d52ea4ff1075"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bca85b499e1a4df0ea12f686f10f3374193a889b8f4017b129a540746ce54e7a"
+    sha256 cellar: :any,                 arm64_tahoe:   "c6c8a4d4ff82b8c3822cc56db33d4936661b2b1c0222e12a1f4470baed1b859a"
+    sha256 cellar: :any,                 arm64_sequoia: "223259c557af0954cecd52cc018fa64b142d98fa940dec98de38450344f902f9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "be76e2bf4c6bde04da92559585d6f7ed2660d3b969ba3bc2fd97c438c5d6b63b"
   end
 
   depends_on "pkgconf" => :build
