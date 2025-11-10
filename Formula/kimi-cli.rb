@@ -3,9 +3,17 @@ class KimiCli < Formula
 
   desc "CLI agent for MoonshotAI Kimi platform"
   homepage "https://github.com/MoonshotAI/kimi-cli"
-  url "https://files.pythonhosted.org/packages/16/1d/a1e13f053fafa55955eb7ccdc8d65b20709c59f17c42cbf6068668668ddb/kimi_cli-0.49.tar.gz"
-  sha256 "eb02c0858d1c62f0f771df5ef29601e8c1b5908b50105881e0cb320bf6067d91"
+  url "https://files.pythonhosted.org/packages/47/2e/d67df2cd1c34ad249c0da99be08bfb486439558caf46f8e5dbb36292b050/kimi_cli-0.51.tar.gz"
+  sha256 "6012a1385be60144cb288f6228f148abc1fff95991bc3beb68b225e403a92b67"
+  license "Apache-2.0"
   head "https://github.com/MoonshotAI/kimi-cli.git", branch: "main"
+
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any,                 arm64_tahoe:   "da8f76fb2a812e6b696b4ef2811fad3bfccd7d6dd1e40f63bf370a473c4a030b"
+    sha256 cellar: :any,                 arm64_sequoia: "aec5995cab779d95ad652a8f494f5e4053250ac4366a8debee03d52ea4ff1075"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bca85b499e1a4df0ea12f686f10f3374193a889b8f4017b129a540746ce54e7a"
+  end
 
   depends_on "pkgconf" => :build
   depends_on "rust" => :build # for jiter
@@ -48,11 +56,6 @@ class KimiCli < Formula
     sha256 "f47eecd9468083c2029cc99945502cb7708b082c232f9aca65da147157b251c7"
   end
 
-  resource "annotated-types" do
-    url "https://files.pythonhosted.org/packages/ee/67/531ea369ba64dcff5ec9c3402f9f51bf748cec26dde048a2f973a4eea7f5/annotated_types-0.7.0.tar.gz"
-    sha256 "aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89"
-  end
-
   resource "anthropic" do
     url "https://files.pythonhosted.org/packages/49/07/61f3ca8e69c5dcdaec31b36b79a53ea21c5b4ca5e93c7df58c71f43bf8d8/anthropic-0.72.0.tar.gz"
     sha256 "8971fe76dcffc644f74ac3883069beb1527641115ae0d6eb8fa21c1ce4082f7a"
@@ -78,16 +81,6 @@ class KimiCli < Formula
     sha256 "0c54cffb19f690cdcc52a3b50bcbf71e07a808d1c80d549f2459b9d2cf0afb9d"
   end
 
-  resource "certifi" do
-    url "https://files.pythonhosted.org/packages/4c/5b/b6ce21586237c77ce67d01dc5507039d444b630dd76611bbca2d8e5dcd91/certifi-2025.10.5.tar.gz"
-    sha256 "47c09d31ccf2acf0be3f701ea53595ee7e0b8fa08801c6624be771df09ae7b43"
-  end
-
-  resource "cffi" do
-    url "https://files.pythonhosted.org/packages/eb/56/b1ba7935a17738ae8453301356628e8147c79dbb825bcbc73dc7401f9846/cffi-2.0.0.tar.gz"
-    sha256 "44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529"
-  end
-
   resource "charset-normalizer" do
     url "https://files.pythonhosted.org/packages/13/69/33ddede1939fdd074bce5434295f38fae7136463422fe4fd3e0e89b98062/charset_normalizer-3.4.4.tar.gz"
     sha256 "94537985111c35f28720e43603b8e7b43a6ecfb2ce1d3058bbe955b73404e21a"
@@ -101,11 +94,6 @@ class KimiCli < Formula
   resource "courlan" do
     url "https://files.pythonhosted.org/packages/6f/54/6d6ceeff4bed42e7a10d6064d35ee43a810e7b3e8beb4abeae8cff4713ae/courlan-1.3.2.tar.gz"
     sha256 "0b66f4db3a9c39a6e22dd247c72cfaa57d68ea660e94bb2c84ec7db8712af190"
-  end
-
-  resource "cryptography" do
-    url "https://files.pythonhosted.org/packages/9f/33/c00162f49c0e2fe8064a62cb92b93e50c74a72bc370ab92f86112b33ff62/cryptography-46.0.3.tar.gz"
-    sha256 "a8b17438104fed022ce745b362294d9ce35b4c2e45c1d958ad4a4b019285f4a1"
   end
 
   resource "cyclopts" do
@@ -224,8 +212,8 @@ class KimiCli < Formula
   end
 
   resource "kosong" do
-    url "https://files.pythonhosted.org/packages/05/b5/7abcb82c44357d0df75bd91a1e84f54c746c0fcf653717110218db288dfa/kosong-0.18.0.tar.gz"
-    sha256 "8285a6a89167ae984be73d953672a0092650d84d449113d97d00dc18d945cdc3"
+    url "https://files.pythonhosted.org/packages/46/16/26f5db6bca645af4b86fbbe4166e6cef6d916bf83294f63be4c06341098f/kosong-0.19.0.tar.gz"
+    sha256 "511438a3c19038da62ecf97155ed5fba242a16f0dbfd7a41e4f46ddd13528d5f"
   end
 
   resource "lazy-object-proxy" do
@@ -279,8 +267,8 @@ class KimiCli < Formula
   end
 
   resource "openai" do
-    url "https://files.pythonhosted.org/packages/51/a2/f4023c1e0c868a6a5854955b3374f17153388aed95e835af114a17eac95b/openai-2.7.1.tar.gz"
-    sha256 "df4d4a3622b2df3475ead8eb0fbb3c27fd1c070fa2e55d778ca4f40e0186c726"
+    url "https://files.pythonhosted.org/packages/c4/44/303deb97be7c1c9b53118b52825cbd1557aeeff510f3a52566b1fa66f6a2/openai-2.6.1.tar.gz"
+    sha256 "27ae704d190615fca0c0fc2b796a38f8b5879645a3a52c9c453b23f97141bb49"
   end
 
   resource "openapi-core" do
@@ -318,11 +306,6 @@ class KimiCli < Formula
     sha256 "6905a3cd17804edfac7875b5f6c9142a218c7caef78693c2dbbbfbac186d88b2"
   end
 
-  resource "pillow" do
-    url "https://files.pythonhosted.org/packages/5a/b0/cace85a1b0c9775a9f8f5d5423c8261c858760e2466c79b2dd184638b056/pillow-12.0.0.tar.gz"
-    sha256 "87d4f8125c9988bfbed67af47dd7a953e2fc7b0cc1e7800ec6d2080d490bb353"
-  end
-
   resource "prompt-toolkit" do
     url "https://files.pythonhosted.org/packages/a1/96/06e01a7b38dce6fe1db213e061a4602dd6032a8a97ef6c1a862537732421/prompt_toolkit-3.0.52.tar.gz"
     sha256 "28cde192929c8e7321de85de1ddbe736f1375148b02f2e17edd840042b1be855"
@@ -331,21 +314,6 @@ class KimiCli < Formula
   resource "propcache" do
     url "https://files.pythonhosted.org/packages/9e/da/e9fc233cf63743258bff22b3dfa7ea5baef7b5bc324af47a0ad89b8ffc6f/propcache-0.4.1.tar.gz"
     sha256 "f48107a8c637e80362555f37ecf49abe20370e557cc4ab374f04ec4423c97c3d"
-  end
-
-  resource "pycparser" do
-    url "https://files.pythonhosted.org/packages/fe/cf/d2d3b9f5699fb1e4615c8e32ff220203e43b248e1dfcc6736ad9057731ca/pycparser-2.23.tar.gz"
-    sha256 "78816d4f24add8f10a06d6f05b4d424ad9e96cfebf68a4ddc99c65c0720d00c2"
-  end
-
-  resource "pydantic" do
-    url "https://files.pythonhosted.org/packages/f3/1e/4f0a3233767010308f2fd6bd0814597e3f63f1dc98304a9112b8759df4ff/pydantic-2.12.3.tar.gz"
-    sha256 "1da1c82b0fc140bb0103bc1441ffe062154c8d38491189751ee00fd8ca65ce74"
-  end
-
-  resource "pydantic-core" do
-    url "https://files.pythonhosted.org/packages/df/18/d0944e8eaaa3efd0a91b0f1fc537d3be55ad35091b6a87638211ba691964/pydantic_core-2.41.4.tar.gz"
-    sha256 "70e47929a9d4a1905a67e4b687d5946026390568a8e952b92824118063cee4d5"
   end
 
   resource "pydantic-settings" do
@@ -423,11 +391,6 @@ class KimiCli < Formula
     sha256 "4c43c61384f257660007acd271a5d8e4abe9be0b069c418d091f7299e080ca9d"
   end
 
-  resource "rpds-py" do
-    url "https://files.pythonhosted.org/packages/48/dc/95f074d43452b3ef5d06276696ece4b3b5d696e7c9ad7173c54b1390cd70/rpds_py-0.28.0.tar.gz"
-    sha256 "abd4df20485a0983e2ca334a216249b6186d6e3c1627e106651943dbdb791aea"
-  end
-
   resource "six" do
     url "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz"
     sha256 "ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81"
@@ -482,16 +445,6 @@ class KimiCli < Formula
   resource "trafilatura" do
     url "https://files.pythonhosted.org/packages/06/25/e3ebeefdebfdfae8c4a4396f5a6ea51fc6fa0831d63ce338e5090a8003dc/trafilatura-2.0.0.tar.gz"
     sha256 "ceb7094a6ecc97e72fea73c7dba36714c5c5b577b6470e4520dca893706d6247"
-  end
-
-  resource "typing-extensions" do
-    url "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz"
-    sha256 "0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"
-  end
-
-  resource "typing-inspection" do
-    url "https://files.pythonhosted.org/packages/55/e3/70399cb7dd41c10ac53367ae42139cf4b1ca5f36bb3dc6c9d33acdb43655/typing_inspection-0.4.2.tar.gz"
-    sha256 "ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464"
   end
 
   resource "tzlocal" do
