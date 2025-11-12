@@ -8,13 +8,6 @@ class KimiCli < Formula
   license "Apache-2.0"
   head "https://github.com/MoonshotAI/kimi-cli.git", branch: "main"
 
-  bottle do
-    root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any,                 arm64_tahoe:   "c6c8a4d4ff82b8c3822cc56db33d4936661b2b1c0222e12a1f4470baed1b859a"
-    sha256 cellar: :any,                 arm64_sequoia: "223259c557af0954cecd52cc018fa64b142d98fa940dec98de38450344f902f9"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "be76e2bf4c6bde04da92559585d6f7ed2660d3b969ba3bc2fd97c438c5d6b63b"
-  end
-
   depends_on "pkgconf" => :build
   depends_on "rust" => :build # for jiter
   depends_on "certifi" => :no_linkage
@@ -404,6 +397,12 @@ class KimiCli < Formula
   resource "socksio" do
     url "https://files.pythonhosted.org/packages/f8/5c/48a7d9495be3d1c651198fd99dbb6ce190e2274d0f28b9051307bdec6b85/socksio-1.0.0.tar.gz"
     sha256 "f88beb3da5b5c38b9890469de67d0cb0f9d494b78b106ca1845f96c10b91c4ac"
+
+    # Unpin flit-core<3 to support 3.14+
+    patch do
+      url "https://github.com/sethmlarson/socksio/commit/b326406915fd98a8185c1c160165c5b8963b30c1.patch?full_index=1"
+      sha256 "7aefa906b62e2c9a8df255ea742ca97e155ac2e1238e49ce11e3e56e37ee1f8b"
+    end
   end
 
   resource "sse-starlette" do
