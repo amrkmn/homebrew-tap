@@ -5,6 +5,13 @@ class Bun < Formula
   sha256 "d6b0065aead1df28a041f3f47d915c31087f09c8605dcffb28c3808b8eabfbb2"
   license "MIT"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256                               arm64_tahoe:   "7eca52e2ee1aafee5cb78050665bc4e92d8ff03444a88d4d8ce12592c3bd5027"
+    sha256                               arm64_sequoia: "af6347af29d362bea0c24976ab2ed86e4af3767d539627a3065039f7a521cc49"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1276b63ad842e8b9ba84627690c1fcf2d9a826b586f3a8c494b8a2e67cfadf53"
+  end
+
   depends_on "node"
 
   def install
