@@ -17,6 +17,15 @@ class Opencode < Formula
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
+
+    # Remove binaries for other architectures, `-musl`, `-baseline`, and `-baseline-musl`
+    arch = Hardware::CPU.arm? ? "arm64" : "x64"
+    os = OS.linux? ? "linux" : "darwin"
+    (libexec/"lib/node_modules/opencode-ai/node_modules").children.each do |d|
+      next unless d.directory?
+
+      rm_r d if d.basename.to_s != "opencode-#{os}-#{arch}"
+    end
   end
 
   test do
