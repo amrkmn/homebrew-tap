@@ -8,6 +8,13 @@ class KimiCli < Formula
   license "Apache-2.0"
   head "https://github.com/MoonshotAI/kimi-cli.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any,                 arm64_tahoe:   "b47047891a418377c2c171873e7b327f307d4804a733187577e1b55cc667aa1f"
+    sha256 cellar: :any,                 arm64_sequoia: "cd2b4f6c8699fb50e1045f4ae0f565f36b96a2f1d1581c673b0f035a180f5ea7"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "762a571b68c364caf073fa7d98708225b69860062231df1c47b001187749d8f6"
+  end
+
   depends_on "pkgconf" => :build
   depends_on "rust" => :build # for jiter
   depends_on "certifi" => :no_linkage
