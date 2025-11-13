@@ -12,7 +12,7 @@ class Bun < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:  "1276b63ad842e8b9ba84627690c1fcf2d9a826b586f3a8c494b8a2e67cfadf53"
   end
 
-  depends_on "node"
+  depends_on "node" => [:build, :test]
 
   def install
     system "npm", "install", *std_npm_args
@@ -29,6 +29,13 @@ class Bun < Formula
 
     ENV["BUN_INSTALL"] = bin.to_s
     generate_completions_from_executable(bin/"bun", "completions")
+  end
+
+  def caveats
+    <<~EOS
+      pnpm requires a Node installation to function. You can install one with:
+        brew install node
+    EOS
   end
 
   test do
