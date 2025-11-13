@@ -33,7 +33,7 @@ class Bun < Formula
 
   def caveats
     <<~EOS
-      pnpm requires a Node installation to function. You can install one with:
+      bun requires a Node installation to function. You can install one with:
         brew install node
     EOS
   end
