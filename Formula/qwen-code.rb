@@ -13,6 +13,7 @@ class QwenCode < Formula
   end
 
   depends_on "node"
+  depends_on "ripgrep"
 
   def install
     system "npm", "install", *std_npm_args
