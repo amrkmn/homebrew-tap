@@ -28,7 +28,7 @@ class Bun < Formula
       rm_r d if d.basename.to_s != "bun-#{os}-#{arch}"
     end
 
-    ENV["BUN_INSTALL"] = bin.to_s
+    ENV["BUN_INSTALL"] = bin
     generate_completions_from_executable(bin/"bun", "completions")
   end
 
