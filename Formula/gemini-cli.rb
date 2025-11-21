@@ -31,6 +31,15 @@ class GeminiCli < Formula
     node_modules = libexec/"lib/node_modules/@google/gemini-cli/node_modules"
     libexec.glob("#{node_modules}/tree-sitter-bash/prebuilds/*")
            .each { |dir| rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}" }
+
+    clipboardy_fallbacks_dir = libexec/"lib/node_modules/@google/#{name}/node_modules/clipboardy/fallbacks"
+    rm_r(clipboardy_fallbacks_dir) # remove pre-built binaries
+    if OS.linux?
+      linux_dir = clipboardy_fallbacks_dir/"linux"
+      linux_dir.mkpath
+      # Replace the vendored pre-built xsel with one we build ourselves
+      ln_sf (Formula["xsel"].opt_bin/"xsel").relative_path_from(linux_dir), linux_dir
+    end
   end
 
   test do
