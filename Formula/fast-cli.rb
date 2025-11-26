@@ -10,6 +10,13 @@ class FastCli < Formula
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
+
+    # Remove non-native architecture prebuilds
+    arch = Hardware::CPU.arm? ? "arm64" : "x64"
+    os = OS.linux? ? "linux" : "darwin"
+    (libexec/"lib/node_modules/fast-cli/node_modules").glob("*/prebuilds/*").each do |dir|
+      rm_r dir if dir.basename.to_s != "#{os}-#{arch}"
+    end
   end
 
   test do
