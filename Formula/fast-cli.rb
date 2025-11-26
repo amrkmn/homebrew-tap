@@ -5,6 +5,13 @@ class FastCli < Formula
   sha256 "94ba89b2bb09edbc24dedddc4d3f0d179240ec7b3d212fcded5f8f73895886b3"
   license "MIT"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any,                 arm64_tahoe:   "407f4e2d785a936f0a4724d88e2cb3dd1d3d702c11971f0682aeedcdaa789811"
+    sha256 cellar: :any,                 arm64_sequoia: "89bf0529ef0b5cf1ab3ae8cea3c9cc1f1c4bca52759ed4954b57027d60e3e325"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "957e8ba90fb25065e8c10a90fa10d47398a6403ed6318d9158dfa6a7054ea590"
+  end
+
   depends_on "node"
 
   def install
