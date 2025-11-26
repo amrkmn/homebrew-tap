@@ -8,7 +8,7 @@ class Distrobox < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "b001ef278c0cf5bafff9d1e510c0c63623c718b372e7a454da8a82acdbfc8604"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "ce649d08be9b0d89271aef4fbed61017ddfbc680cfe202bfcfebcda4474baea5"
   end
 
   depends_on :linux
