@@ -7,9 +7,10 @@ class Bun < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256                               arm64_tahoe:   "6fccbd72167903cb1c38a30ea43b67e0e76f350c4339c38855e606961449a44c"
-    sha256                               arm64_sequoia: "ff85fd610dd7320826ff9a599d903683c271e01e2ab9280ef842ecce9d62e38b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ade9c7b539d878e9972f270946b48f02a00796c0f71fd7cb92fab897fac67656"
+    rebuild 1
+    sha256                               arm64_tahoe:   "f72e4cbc8aadcee5476e80911a6c59443f8ce8e5da94d06badb10763d2607251"
+    sha256                               arm64_sequoia: "d7dc167e445c06f977cd1b09d86c46e4b9f86a4b24ba142bbde33a6c316a3bd4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "49a36d70d9ee3d0290091e552743fb422b51b0abbca52045cfe56441c83b204b"
   end
 
   depends_on "node" => [:build, :test]
