@@ -18,23 +18,24 @@ class Bun < Formula
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
 
-    # Remove binaries for other architectures, `-musl`, `-baseline`, and `-baseline-musl`
     arch = Hardware::CPU.arm? ? "aarch64" : "x64"
     os = OS.linux? ? "linux" : "darwin"
     (libexec/"lib/node_modules/bun/node_modules/@oven").children.each do |d|
       next unless d.directory?
-
       rm_r d if d.basename.to_s != "bun-#{os}-#{arch}"
     end
 
-    ENV["BUN_INSTALL"] = bin
-    generate_completions_from_executable(bin/"bun", "completions")
+    generate_completions_from_executable(libexec/"bin/bun", "completions")
   end
 
   def caveats
     <<~EOS
       bun requires a Node installation to function. You can install one with:
         brew install node
+
+      To use bun, add the following to your shell profile (~/.zshrc, ~/.bashrc, etc.):
+        export BUN_INSTALL="$HOME/.bun"
+        export PATH="$BUN_INSTALL/bin:$PATH"
     EOS
   end
 
