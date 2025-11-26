@@ -22,6 +22,7 @@ class Bun < Formula
     os = OS.linux? ? "linux" : "darwin"
     (libexec/"lib/node_modules/bun/node_modules/@oven").children.each do |d|
       next unless d.directory?
+
       rm_r d if d.basename.to_s != "bun-#{os}-#{arch}"
     end
 
