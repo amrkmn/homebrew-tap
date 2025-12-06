@@ -1,8 +1,8 @@
 class ActionsUp < Formula
   desc "Interactive CLI tool to update GitHub Actions"
   homepage "https://github.com/azat-io/actions-up"
-  url "https://registry.npmjs.org/actions-up/-/actions-up-1.6.0.tgz"
-  sha256 "470a128988a0ddfdcdd67e8a8d8fd1cecef081ba52f968cf77a3790b8208ed6e"
+  url "https://registry.npmjs.org/actions-up/-/actions-up-1.7.0.tgz"
+  sha256 "149d438a9045b5e80149358ca9a3e936668816c601fe17298a1a16564bbcac40"
   license "MIT"
 
   bottle do
