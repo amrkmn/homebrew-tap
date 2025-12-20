@@ -8,7 +8,7 @@ class PlayitAgent < Formula
 
   livecheck do
     url :stable
-    regex(/^v(\d+(?:\.\d+)*)(?!-rc)/)
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
   bottle do
