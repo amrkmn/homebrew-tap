@@ -7,7 +7,7 @@ class Age < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "a5818c0e692453c346c5a728e0fed44de47285e89a76180e25f731aeaf8745ba"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "f6bd762d15320fa2b55127116a19024b73b692c132df199566edb4139a6fa646"
   end
 
   depends_on "go" => :build
