@@ -4,6 +4,7 @@ class Runitor < Formula
   url "https://github.com/bdd/runitor/archive/refs/tags/v1.4.1.tar.gz"
   sha256 "192665c623bc96ed77f122510510c017197e1673ab92bb84546d652afe4416c0"
   license "0BSD"
+  revision 1
   head "https://github.com/bdd/runitor.git", branch: "main"
 
   livecheck do
