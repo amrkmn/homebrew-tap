@@ -14,8 +14,7 @@ class Runitor < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "ae60bf0abd5ddc62fafab3658cd0a2f52641f618e01a7311d9b5cf15d9dbaf07"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "3a44525fd75b9a9a0b04f88da81869c245e13566317d381b0c6e5332d8207446"
   end
 
   depends_on "go" => :build
