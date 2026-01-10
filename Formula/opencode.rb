@@ -7,6 +7,13 @@ class Opencode < Formula
   revision 1
   head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
+  livecheck do
+    url "https://github.com/anomalyco/opencode/releases/latest/download/latest.json"
+    strategy :json do |json|
+      json["version"]
+    end
+  end
+
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
     sha256 cellar: :any_skip_relocation, x86_64_linux: "33b0381d90bcfa7892bac525bc331ae8dd024e5a31a58287253d498a3a8419e1"
