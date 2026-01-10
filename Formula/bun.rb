@@ -9,7 +9,6 @@ class Bun < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
 
     arch = Hardware::CPU.arm? ? "aarch64" : "x64"
     os = OS.linux? ? "linux" : "darwin"
@@ -19,6 +18,8 @@ class Bun < Formula
 
       rm_r d if d.basename.to_s != "bun-#{os}-#{arch}"
     end
+
+    bin.install_symlink Dir["#{libexec}/bin/*"]
   end
 
   test do
