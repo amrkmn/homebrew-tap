@@ -1,29 +1,37 @@
 class Opencode < Formula
   desc "AI coding agent, built for the terminal"
   homepage "https://opencode.ai/"
-  url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.1.11.tgz"
-  sha256 "49418b422c89fd795b5c8f4289eb70aa21e539a36cb309bb5c5130ca0bdb1ec6"
+  url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.1.11.tar.gz"
+  sha256 "305128baf789ed0eba1b9bf1d3a58634b176a072063890d80527ab4898a983e5"
   license "MIT"
+  revision 1
+  head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
     sha256 cellar: :any_skip_relocation, x86_64_linux: "93aea427f25f008ec6186770d60e683019ba38cb0bea18644b9120e263672bfc"
   end
 
-  depends_on "node"
+  depends_on "amrkmn/tap/bun" => :build
+  depends_on "ripgrep"
 
   def install
-    system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    system "bun", "install"
+    cd "packages/opencode" do
+      ENV["OPENCODE_CHANNEL"] = build.head? ? "canary" : "latest"
+      ENV["OPENCODE_VERSION"] = build.head? ? version.commit : version.to_s
+      system "bun", "run", "./script/build.ts", "--single"
 
-    # Remove binaries for other architectures, `-musl`, `-baseline`, and `-baseline-musl`
-    arch = Hardware::CPU.arm? ? "arm64" : "x64"
-    os = OS.linux? ? "linux" : "darwin"
-    (libexec/"lib/node_modules/opencode-ai/node_modules").children.each do |d|
-      next unless d.directory?
+      arch = Hardware::CPU.arm? ? "arm64" : "x64"
+      os = OS.linux? ? "linux" : "darwin"
+      suffix = (build.head? && !Hardware::CPU.avx2?) ? "-baseline" : ""
+      target_dir = "opencode-#{os}-#{arch}#{suffix}"
 
-      rm_r d if d.basename.to_s != "opencode-#{os}-#{arch}"
+      rm_r Dir["dist/*"].reject { |dir| File.basename(dir) == target_dir }
+      bin.install "dist/#{target_dir}/bin/opencode"
     end
+
+    generate_completions_from_executable(bin/"opencode", "completion", shells: [:bash, :zsh])
   end
 
   test do
