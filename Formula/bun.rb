@@ -8,8 +8,16 @@ class Bun < Formula
   depends_on "node" => :build
 
   def install
-    system "npm", "install", *std_npm_args
+    # Install the npm package and run postinstall which downloads platform-specific binaries
+    system "npm", "install", "--ignore-scripts", *std_npm_args
+    system "node", libexec/"lib/node_modules/bun/install.js"
 
+    # The postinstall script creates bin/bun.exe and bin/bunx.exe
+    # Install them as bun and bunx (without .exe extension)
+    bin.install libexec/"lib/node_modules/bun/bin/bun.exe" => "bun"
+    bin.install libexec/"lib/node_modules/bun/bin/bunx.exe" => "bunx"
+
+    # Clean up unused platform binaries to save space
     arch = Hardware::CPU.arm? ? "aarch64" : "x64"
     os = OS.linux? ? "linux" : "darwin"
 
@@ -18,8 +26,6 @@ class Bun < Formula
 
       rm_r d if d.basename.to_s != "bun-#{os}-#{arch}"
     end
-
-    bin.install_symlink Dir["#{libexec}/bin/*"]
   end
 
   test do
