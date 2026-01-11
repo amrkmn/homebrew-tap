@@ -36,8 +36,6 @@ class Opencode < Formula
       rm_r Dir["dist/*"].reject { |dir| File.basename(dir) == target_dir }
       bin.install "dist/#{target_dir}/bin/opencode"
     end
-
-    generate_completions_from_executable(bin/"opencode", "completion", shells: [:bash, :zsh])
   end
 
   test do
