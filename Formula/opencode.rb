@@ -25,7 +25,7 @@ class Opencode < Formula
     system "bun", "install"
     cd "packages/opencode" do
       ENV["OPENCODE_CHANNEL"] = build.head? ? "canary" : "latest"
-      ENV["OPENCODE_VERSION"] = build.head? ? version.commit : version.to_s
+      ENV["OPENCODE_VERSION"] = build.head? ? "canary-#{version.commit}" : version.to_s
       system "bun", "run", "./script/build.ts", "--single"
 
       arch = Hardware::CPU.arm? ? "arm64" : "x64"
