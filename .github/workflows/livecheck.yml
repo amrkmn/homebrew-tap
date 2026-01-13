@@ -42,6 +42,12 @@ jobs:
                   jq -c '.[] | select(.status != "skipped") | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
                   name="$(echo "$formula" | jq -r .formula)"
                   new_ver="$(echo "$formula" | jq -r .version.latest)"
+                  
+                  # Skip if branch already exists remotely
+                  if git ls-remote --heads origin "bump-${name}-${new_ver}" | grep -q .; then
+                    echo "Skipping $name $new_ver - branch already exists"
+                    continue
+                  fi
 
                   brew bump-formula-pr \
                     --no-audit --no-browse --force \
