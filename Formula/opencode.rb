@@ -18,7 +18,7 @@ class Opencode < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "842d54ee23b7c0ea7fbc98e6cfedc990449c331819b5c55a94e925ce382c5a2f"
   end
 
-  depends_on "amrkmn/tap/bun" => :build
+  depends_on "amrkmn/tap/bun@1.3.5" => :build
   depends_on "ripgrep"
 
   def install
