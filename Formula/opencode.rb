@@ -4,6 +4,7 @@ class Opencode < Formula
   url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.1.25.tar.gz"
   sha256 "b7d21f9a3b4418e1f449c14466817eeb609af7e75cb1f5cb7966d15ecfb62ea4"
   license "MIT"
+  revision 1
   head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
   livecheck do
@@ -18,7 +19,7 @@ class Opencode < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "8def67610072fe4837950c8b6aa483b534aa0b8e6f2a1b13ce99623f06dfc364"
   end
 
-  depends_on "amrkmn/tap/bun@1.3.5" => :build
+  depends_on "amrkmn/bun/bun@1.3.5" => :build
   depends_on "ripgrep"
 
   def install
