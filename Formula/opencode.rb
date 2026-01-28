@@ -1,8 +1,8 @@
 class Opencode < Formula
   desc "AI coding agent, built for the terminal"
   homepage "https://opencode.ai/"
-  url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.1.37.tar.gz"
-  sha256 "0cf38e7c15a4999fe2e001eedb9ae0d9e73f929fcc43da5c7f8b6fc153275493"
+  url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.1.39.tar.gz"
+  sha256 "3b8f773f6fd1c6612d63acd2eaa792f90b034fe0a67ffb6046e3e2a7de67c1ba"
   license "MIT"
   head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
