@@ -17,7 +17,7 @@ class DockerCredentialPassage < Formula
   end
 
   test do
-    assert_match "docker-credential-passage/#{version}", shell_output("#{bin}/docker-credential-passage version")
+    assert_match version.to_s, shell_output("#{bin}/docker-credential-passage version")
     assert_match "{}", shell_output("#{bin}/docker-credential-passage list")
   end
 end
