@@ -1,8 +1,8 @@
 class DockerCredentialPassage < Formula
   desc "Docker credential helper using age encryption"
   homepage "https://github.com/amrkmn/docker-credential-passage"
-  url "https://github.com/amrkmn/docker-credential-passage/archive/refs/tags/v0.1.2.tar.gz"
-  sha256 "9654874721c73436b5a950856de7dff9eaf68f9ee074dbfea43b7f059625fea2"
+  url "https://github.com/amrkmn/docker-credential-passage/archive/refs/tags/v0.1.3.tar.gz"
+  sha256 "6b95db102bbdf6aabe14dd855a6123582a99f17dfb3ae0f8af3fc5fbf31f7a94"
   license "MIT"
 
   bottle do
