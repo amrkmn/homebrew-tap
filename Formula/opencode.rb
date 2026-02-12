@@ -1,8 +1,8 @@
 class Opencode < Formula
   desc "AI coding agent, built for the terminal"
   homepage "https://opencode.ai/"
-  url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.1.53.tar.gz"
-  sha256 "50690119a9c84ad3b3741c13c8d31eb00ac41fd737e9cbd72baf2636b7249e3a"
+  url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.1.60.tar.gz"
+  sha256 "cbda55ed21bcb64045b3ac9c645ad365c2f18108f57a3ee82977df7b636ac397"
   license "MIT"
   head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
@@ -18,7 +18,7 @@ class Opencode < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "6988e5875202a158a93cfd2874c4e0e884fd56747f624d40a8131463a4a94218"
   end
 
-  depends_on "amrkmn/bun/bun@1.3.5" => :build
+  depends_on "amrkmn/bun/bun@1.3.9" => :build
   depends_on "ripgrep"
 
   def install
