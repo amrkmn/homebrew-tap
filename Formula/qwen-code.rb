@@ -7,7 +7,7 @@ class QwenCode < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "1d58a523f09d8474aef75374e71b6af50a0a7bfd7f97729bf55da39b48ab0060"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "b9fd3700e907edbc8d928df79f860bbe01f5032eccc4f6c3b7f0fd8f3fd93829"
   end
 
   depends_on "node"
