@@ -1,0 +1,35 @@
+class Passage < Formula
+  desc "Password store using age encryption"
+  homepage "https://github.com/FiloSottile/passage"
+  url "https://github.com/FiloSottile/passage/archive/refs/tags/1.7.4a2.tar.gz"
+  sha256 "d4bd97be2eda4249b31c2042707ef70ba50385f6fb7791598f51be794168ee2c"
+  license "GPL-2.0-or-later"
+  head "https://github.com/FiloSottile/passage.git", branch: "main"
+
+  depends_on "age"
+  depends_on "qrencode"
+  depends_on "tree"
+
+  on_macos do
+    depends_on "gnu-getopt"
+  end
+
+  def install
+    system "make", "PREFIX=#{prefix}", "install"
+
+    bash_completion.install "src/completion/pass.bash-completion" => "passage"
+    zsh_completion.install "src/completion/pass.zsh-completion" => "_passage"
+    fish_completion.install "src/completion/pass.fish-completion" => "passage.fish"
+
+    inreplace bin/"passage",
+              /^SYSTEM_EXTENSION_DIR=.*$/,
+              "SYSTEM_EXTENSION_DIR=\"#{HOMEBREW_PREFIX}/lib/passage/extensions\""
+  end
+
+  test do
+    assert_match "Usage:", shell_output("#{bin}/passage 2>&1", 1)
+    assert_path_exists bash_completion/"passage.bash"
+    assert_path_exists zsh_completion/"_passage"
+    assert_path_exists fish_completion/"passage.fish"
+  end
+end
