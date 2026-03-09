@@ -3,13 +3,9 @@ class Passage < Formula
   homepage "https://github.com/FiloSottile/passage"
   url "https://github.com/FiloSottile/passage/archive/refs/tags/1.7.4a2.tar.gz"
   sha256 "d4bd97be2eda4249b31c2042707ef70ba50385f6fb7791598f51be794168ee2c"
+  version "1.7.4a2"
   license "GPL-2.0-or-later"
   head "https://github.com/FiloSottile/passage.git", branch: "main"
-
-  bottle do
-    root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "9359ace1c2a29ba1ec7fde8c187bc6f2eaf3988d82188f5f4026c175aada097d"
-  end
 
   depends_on "age"
   depends_on "qrencode"
