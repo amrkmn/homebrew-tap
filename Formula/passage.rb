@@ -17,10 +17,6 @@ class Passage < Formula
   def install
     system "make", "PREFIX=#{prefix}", "install"
 
-    bash_completion.install "src/completion/pass.bash-completion"
-    zsh_completion.install "src/completion/pass.zsh-completion"
-    fish_completion.install "src/completion/pass.fish-completion"
-
     inreplace bin/"passage",
               /^SYSTEM_EXTENSION_DIR=.*$/,
               "SYSTEM_EXTENSION_DIR=\"#{HOMEBREW_PREFIX}/lib/passage/extensions\""
@@ -28,7 +24,7 @@ class Passage < Formula
 
   test do
     assert_match "Usage:", shell_output("#{bin}/passage 2>&1", 1)
-    assert_path_exists bash_completion/"passage.bash"
+    assert_path_exists bash_completion/"passage"
     assert_path_exists zsh_completion/"_passage"
     assert_path_exists fish_completion/"passage.fish"
   end
