@@ -15,7 +15,11 @@ class Passage < Formula
   end
 
   def install
-    system "make", "PREFIX=#{prefix}", "install"
+    system "make", "PREFIX=#{prefix}",
+           "WITH_BASHCOMP=yes",
+           "WITH_ZSHCOMP=yes",
+           "WITH_FISHCOMP=yes",
+           "install"
 
     inreplace bin/"passage",
               /^SYSTEM_EXTENSION_DIR=.*$/,
