@@ -24,8 +24,8 @@ class Passage < Formula
 
   test do
     assert_match "Usage:", shell_output("#{bin}/passage 2>&1", 1)
-    assert_path_exists bash_completion_root/"passage"
-    assert_path_exists zsh_completion_root/"_passage"
-    assert_path_exists fish_completion_root/"passage.fish"
+    assert_path_exists "#{prefix}/share/bash-completion/completions/passage"
+    assert_path_exists "#{prefix}/share/zsh/site-functions/_passage"
+    assert_path_exists "#{prefix}/share/fish/vendor_completions.d/passage.fish"
   end
 end
