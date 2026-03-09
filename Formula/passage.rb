@@ -17,9 +17,9 @@ class Passage < Formula
   def install
     system "make", "PREFIX=#{prefix}", "install"
 
-    bash_completion.install "src/completion/pass.bash-completion" => "passage"
-    zsh_completion.install "src/completion/pass.zsh-completion" => "_passage"
-    fish_completion.install "src/completion/pass.fish-completion" => "passage.fish"
+    bash_completion.install "src/completion/pass.bash-completion"
+    zsh_completion.install "src/completion/pass.zsh-completion"
+    fish_completion.install "src/completion/pass.fish-completion"
 
     inreplace bin/"passage",
               /^SYSTEM_EXTENSION_DIR=.*$/,
