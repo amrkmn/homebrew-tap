@@ -24,9 +24,10 @@ class Croc < Formula
     ENV["CROC_SECRET"] = "homebrew-test"
 
     port=free_port
+    port2=port+1
 
     fork do
-      exec bin/"croc", "relay", "--ports=#{port}"
+      exec bin/"croc", "relay", "--ports=#{port},#{port2}"
     end
     sleep 3
 
