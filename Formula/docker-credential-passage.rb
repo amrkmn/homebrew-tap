@@ -7,7 +7,7 @@ class DockerCredentialPassage < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "05791a9d8796ea687e4fce4377c96fc5ffb80f304f6614421f9cede371634c1c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "afe4dbb1d2bcdfc7c29be4d70c2f8555c434662e7c313f167c5a407413a420ab"
   end
 
   depends_on "go" => :build
