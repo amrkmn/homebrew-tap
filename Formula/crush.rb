@@ -7,7 +7,7 @@ class Crush < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "03fbd4e982ad7069afe2abbba9c70187ef5cea97ce8725b991281bc3b9456398"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "98a05ee95ece849a866d66bb689a9eae0bdd617ed44532042af48c81a1515217"
   end
 
   depends_on "node"
