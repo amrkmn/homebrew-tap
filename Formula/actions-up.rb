@@ -7,7 +7,7 @@ class ActionsUp < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "6140e78f8bf8f75b8e3d1ef3ea0659be357495d85d1e0d76d3f5ba2d2e14b742"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "7b8fff7bf663ac6bc1497ad94217ed17b5e24bae1d13c726e2dc1381022dde1a"
   end
 
   depends_on "node"
