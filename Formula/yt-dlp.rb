@@ -6,6 +6,7 @@ class YtDlp < Formula
   url "https://files.pythonhosted.org/packages/8b/34/7c6b4e3f89cb6416d2cd7ab6dab141a1df97ab0fb22d15816db2c92148c9/yt_dlp-2026.3.17.tar.gz"
   sha256 "ba7aa31d533f1ffccfe70e421596d7ca8ff0bf1398dc6bb658b7d9dec057d2c9"
   license "Unlicense"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
