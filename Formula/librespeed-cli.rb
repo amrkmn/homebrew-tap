@@ -8,9 +8,7 @@ class LibrespeedCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "6e262800dda51666d982b5656f93b5fc37101c7ae99cd84c0c5707aaebfb5004"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "12af3ed15247637dfc63ea2bdbe5d8d41d195ebac115bad48ca8bb8ffe07f8ad"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4290fca2cc10daaa346a7a002b5202d42c10ea7dba9071a9853af2d79c0be43a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "a8ff621b999b1b4f5cd85b1dbeb4dc67ff3ab3ba1d17eb495bf5cfc8323d3e93"
   end
 
   depends_on "go" => :build
