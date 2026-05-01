@@ -31,7 +31,7 @@ class GeminiCli < Formula
     end
 
     # Selectivly run `npm run build` for keytar to generate `keytar.node
-    cd node_modules/"keytar" do
+    cd node_modules/"@github/keytar" do
       system "npm", "run", "build"
     end
   end
