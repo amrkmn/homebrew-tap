@@ -26,13 +26,8 @@ class GeminiCli < Formula
     os = OS.kernel_name.downcase
     arch = Hardware::CPU.intel? ? "x64" : Hardware::CPU.arch.to_s
     node_modules = libexec/"lib/node_modules/@google/gemini-cli/node_modules"
-    node_modules.glob("{bare-fs,bare-os,bare-url,tree-sitter-bash,node-pty}/prebuilds/*").each do |dir|
+    node_modules.glob("{bare-fs,bare-os,bare-url,tree-sitter-bash,node-pty,@github/keytar}/prebuilds/*").each do |dir|
       rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}"
-    end
-
-    # Selectivly run `npm run build` for keytar to generate `keytar.node
-    cd node_modules/"@github/keytar" do
-      system "npm", "run", "build"
     end
   end
 
