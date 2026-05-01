@@ -1,8 +1,8 @@
 class GeminiCli < Formula
   desc "Interact with Google Gemini AI models from the command-line"
   homepage "https://github.com/google-gemini/gemini-cli"
-  url "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.38.2.tgz"
-  sha256 "9b0c752cfe9375370e1812f37afffd97387b99df71e64cea53e588a25f4d688c"
+  url "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.40.1.tgz"
+  sha256 "893205127c072d3baa2fba419a28081b9fd5cb77c745883139dd9e3e2c1a2b2d"
   license "Apache-2.0"
 
   bottle do
@@ -12,9 +12,15 @@ class GeminiCli < Formula
 
   depends_on "node"
 
+  on_linux do
+    depends_on "pkgconf" => :build
+    depends_on "glib"
+    depends_on "libsecret"
+  end
+
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     # Remove incompatible pre-built binaries
     os = OS.kernel_name.downcase
@@ -23,9 +29,15 @@ class GeminiCli < Formula
     node_modules.glob("{bare-fs,bare-os,bare-url,tree-sitter-bash,node-pty}/prebuilds/*").each do |dir|
       rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}"
     end
+
+    # Selectivly run `npm run build` for keytar to generate `keytar.node
+    cd node_modules/"keytar" do
+      system "npm", "run", "build"
+    end
   end
 
   test do
     assert_match version.to_s, shell_output("#{bin}/gemini --version")
+    assert_match "Please set an Auth method", shell_output("#{bin}/gemini --prompt Homebrew 2>&1", 41)
   end
 end
