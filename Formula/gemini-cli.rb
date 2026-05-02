@@ -22,19 +22,17 @@ class GeminiCli < Formula
     system "npm", "install", *std_npm_args
     bin.install_symlink libexec.glob("bin/*")
 
-    node_modules = libexec/"lib/node_modules/@google/gemini-cli/node_modules"
-
-    # Build keytar with dynamic linking for system libraries
-    env = { "KEYTAR_BUILD_TYPE" => "dynamic" }
-    cd node_modules/"@github/keytar" do
-      system env, "npm", "run", "build"
-    end
-
-    # Remove incompatible pre-built binaries (except @github/keytar which is built from source)
+    # Remove incompatible pre-built binaries
     os = OS.kernel_name.downcase
     arch = Hardware::CPU.intel? ? "x64" : Hardware::CPU.arch.to_s
+    node_modules = libexec/"lib/node_modules/@google/gemini-cli/node_modules"
     node_modules.glob("{bare-fs,bare-os,bare-url,tree-sitter-bash,node-pty}/prebuilds/*").each do |dir|
       rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}"
+    end
+
+    cd node_modules/"@github/keytar" do
+      rm_r "prebuilds"
+      system "npm", "run", "build"
     end
   end
 
