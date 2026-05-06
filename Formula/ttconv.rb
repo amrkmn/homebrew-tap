@@ -7,6 +7,11 @@ class Ttconv < Formula
   sha256 "c0597dc04d1076192b94156dbe9d1e7e113d1323a1802ecaa062ccdf70b04d16"
   license "BSD-2-Clause"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "94c0e5a512fa056f44c00ed136c70f5e340412789744bbd51b749780b9f28923"
+  end
+
   depends_on "python@3.14"
 
   def install
