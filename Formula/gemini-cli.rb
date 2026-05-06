@@ -7,7 +7,7 @@ class GeminiCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "e0f23590a84bc920a32a3154e683d5b50ba0725cc866dd19965e3d1744468376"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "08b6f4151eaf1c8dc47fa81e48fed61fd2d9b6310b06552880366137202cb831"
   end
 
   depends_on "node"
