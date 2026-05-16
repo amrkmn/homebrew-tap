@@ -43,7 +43,6 @@ class PlayitAgent < Formula
     <<~EOS
       To start the playit daemon:
         brew services start #{name}
-
       After the service is running, run:
         #{opt_bin}/playit setup
     EOS
