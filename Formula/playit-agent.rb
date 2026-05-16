@@ -39,6 +39,16 @@ class PlayitAgent < Formula
     working_dir var
   end
 
+  def caveats
+    <<~EOS
+      To start the playit daemon:
+        brew services start #{name}
+
+      After the service is running, run:
+        #{opt_bin}/playit setup
+    EOS
+  end
+
   test do
     assert_match version.to_s, shell_output("#{bin}/playit version")
   end
