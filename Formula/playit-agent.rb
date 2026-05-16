@@ -14,23 +14,18 @@ class PlayitAgent < Formula
   depends_on "rust" => :build
 
   def install
+    # Patch the compiled-in default socket path to use Homebrew's user-writable
+    # directory (the upstream default /var/run/playitd.sock requires root)
+    inreplace "packages/playit-ipc/src/paths.rs", "/var/run/playitd.sock", "#{var}/run/playitd.sock"
+
     system "cargo", "install", *std_cargo_args(path: "packages/playit-cli")
     system "cargo", "install", *std_cargo_args(path: "packages/playitd")
-
-    # Wrap playit-cli to use Homebrew's user-level socket path
-    # (the default /var/run/playitd.sock requires root)
-    (libexec/"playit").write <<~EOS
-      #!/bin/bash
-      exec "#{bin}/playit-cli" --socket-path "#{var}/run/playitd.sock" "$@"
-    EOS
-    chmod 0755, libexec/"playit"
-    bin.install_symlink libexec/"playit" => "playit"
+    bin.install_symlink "playit-cli" => "playit"
   end
 
   service do
     run [opt_bin/"playitd",
          "--secret-path", var/"playit/playit.toml",
-         "--socket-path", var/"run/playitd.sock",
          "--log-path", var/"log/playitd.log"]
     run_type :immediate
     keep_alive true
