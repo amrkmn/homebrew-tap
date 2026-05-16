@@ -4,7 +4,7 @@ class PlayitAgent < Formula
   url "https://github.com/playit-cloud/playit-agent/archive/refs/tags/v1.0.2.tar.gz"
   sha256 "396f0c10753640a35a3d7db1aed9884ce138af445175243b942235faa0fd4cd1"
   license "BSD-2-Clause"
-  revision 2
+  revision 3
   head "https://github.com/playit-cloud/playit-agent.git", branch: "master"
 
   livecheck do
@@ -26,8 +26,6 @@ class PlayitAgent < Formula
     system "cargo", "install", *std_cargo_args(path: "packages/playit-cli")
     system "cargo", "install", *std_cargo_args(path: "packages/playitd")
     bin.install_symlink "playit-cli" => "playit"
-
-    (etc/"playit").mkpath
   end
 
   service do
@@ -48,9 +46,6 @@ class PlayitAgent < Formula
 
       After the service is running, run:
         #{opt_bin}/playit setup
-
-      The secret key is stored in:
-        #{etc}/playit/playit.toml
     EOS
   end
 
