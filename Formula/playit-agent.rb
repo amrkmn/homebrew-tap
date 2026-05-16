@@ -26,11 +26,13 @@ class PlayitAgent < Formula
     system "cargo", "install", *std_cargo_args(path: "packages/playit-cli")
     system "cargo", "install", *std_cargo_args(path: "packages/playitd")
     bin.install_symlink "playit-cli" => "playit"
+
+    (etc/"playit").mkpath
   end
 
   service do
     run [opt_bin/"playitd",
-         "--secret-path", var/"playit/playit.toml",
+         "--secret-path", etc/"playit/playit.toml",
          "--log-path", var/"log/playitd.log"]
     run_type :immediate
     keep_alive true
@@ -46,6 +48,9 @@ class PlayitAgent < Formula
 
       After the service is running, run:
         #{opt_bin}/playit setup
+
+      The secret key is stored in:
+        #{etc}/playit/playit.toml
     EOS
   end
 
