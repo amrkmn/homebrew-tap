@@ -13,14 +13,35 @@ class PlayitAgent < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "dfc8451f9a310431920a3d29eb46330172fc3e8206bf720b2af40e1fa04a6777"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "311fca726369d4e633284963c9ec648a182aafa3c7bcb35fb3469122c3a84adb"
   end
 
   depends_on "rust" => :build
 
   def install
     system "cargo", "install", *std_cargo_args(path: "packages/playit-cli")
-    bin.install_symlink "playit-cli" => "playit"
+    system "cargo", "install", *std_cargo_args(path: "packages/playitd")
+
+    # Wrap playit-cli to use Homebrew's user-level socket path
+    # (the default /var/run/playitd.sock requires root)
+    (libexec/"playit").write <<~EOS
+      #!/bin/bash
+      exec "#{bin}/playit-cli" --socket-path "#{var}/run/playitd.sock" "$@"
+    EOS
+    chmod 0755, libexec/"playit"
+    bin.install_symlink libexec/"playit" => "playit"
+  end
+
+  service do
+    run [opt_bin/"playitd",
+         "--secret-path", var/"playit/playit.toml",
+         "--socket-path", var/"run/playitd.sock",
+         "--log-path", var/"log/playitd.log"]
+    run_type :immediate
+    keep_alive true
+    log_path var/"log/playitd.log"
+    error_log_path var/"log/playitd.error.log"
+    working_dir var
   end
 
   test do
