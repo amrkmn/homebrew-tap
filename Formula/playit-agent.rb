@@ -4,7 +4,7 @@ class PlayitAgent < Formula
   url "https://github.com/playit-cloud/playit-agent/archive/refs/tags/v1.0.2.tar.gz"
   sha256 "396f0c10753640a35a3d7db1aed9884ce138af445175243b942235faa0fd4cd1"
   license "BSD-2-Clause"
-  revision 1
+  revision 2
   head "https://github.com/playit-cloud/playit-agent.git", branch: "master"
 
   livecheck do
@@ -30,7 +30,7 @@ class PlayitAgent < Formula
 
   service do
     run [opt_bin/"playitd",
-         "--secret-path", var/"playit/playit.toml",
+         "--secret-path", etc/"playit/playit.toml",
          "--log-path", var/"log/playitd.log"]
     run_type :immediate
     keep_alive true
@@ -46,6 +46,9 @@ class PlayitAgent < Formula
 
       After the service is running, run:
         #{opt_bin}/playit setup
+
+      The secret key is stored in:
+        #{etc}/playit/playit.toml
     EOS
   end
 
