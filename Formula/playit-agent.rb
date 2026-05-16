@@ -14,8 +14,7 @@ class PlayitAgent < Formula
   depends_on "rust" => :build
 
   def install
-    # Patch the compiled-in default socket path to use Homebrew's user-writable
-    # directory (the upstream default /var/run/playitd.sock requires root)
+    # Patch compiled-in default: /var/run/playitd.sock → #{var}/run/playitd.sock
     inreplace "packages/playit-ipc/src/paths.rs", "/var/run/playitd.sock", "#{var}/run/playitd.sock"
 
     system "cargo", "install", *std_cargo_args(path: "packages/playit-cli")
