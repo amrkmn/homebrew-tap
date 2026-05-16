@@ -15,7 +15,7 @@ class Opencode < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "5d76a2cd9fd0866963b1d0ef1b235016c92151b29cd29cba6036fe38155fd67e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "3379adc8c3bacaf40352a9ff8873f54493664f9c1d949867023b3a2360710634"
   end
 
   # Pinned to 1.3.13 as 1.3.14 give segfaults (exit 139)
