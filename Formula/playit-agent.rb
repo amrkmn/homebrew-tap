@@ -1,8 +1,8 @@
 class PlayitAgent < Formula
   desc "Secure tunnel client to expose local servers via Playit.gg"
   homepage "https://github.com/playit-cloud/playit-agent"
-  url "https://github.com/playit-cloud/playit-agent/archive/refs/tags/v1.0.3.tar.gz"
-  sha256 "a8917d9e85012e4b52d4aa7c4f432188a624198da71a5df72ca136e2e3a47287"
+  url "https://github.com/playit-cloud/playit-agent/archive/refs/tags/v1.0.4.tar.gz"
+  sha256 "06620b864c8b41ec6d2a752237936e55da10aafc34f8d5b236b1ff8e8a779596"
   license "BSD-2-Clause"
   head "https://github.com/playit-cloud/playit-agent.git", branch: "master"
 
