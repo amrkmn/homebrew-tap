@@ -1,10 +1,9 @@
 class Opencode < Formula
   desc "AI coding agent, built for the terminal"
   homepage "https://opencode.ai/"
-  url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.15.7.tar.gz"
-  sha256 "b162fcf399b13aed4611631fd710e9dee83ec565f765f5fbcc496dfdc9c2c873"
+  url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.15.7.tgz"
+  sha256 "fce00477c705e2cfe9cf9e91cd31b54ac9355a0a83e5c6bd2034f4ffb8aad7e0"
   license "MIT"
-  head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
   livecheck do
     url "https://github.com/anomalyco/opencode/releases/latest/download/latest.json"
@@ -18,23 +17,20 @@ class Opencode < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "178e32189a940f664f32fab93f0b50613270a392a850058b51ae3b5d9d4e1ace"
   end
 
-  depends_on "amrkmn/bun/bun" => :build
+  depends_on "node"
   depends_on "ripgrep"
 
   def install
-    system "bun", "install"
-    cd "packages/opencode" do
-      ENV["OPENCODE_CHANNEL"] = build.head? ? "canary" : "latest"
-      ENV["OPENCODE_VERSION"] = build.head? ? "canary-#{version.commit}" : version.to_s
-      system "bun", "run", "./script/build.ts", "--single"
+    system "npm", "install", *std_npm_args(ignore_scripts: false)
+    bin.install_symlink libexec.glob("bin/*")
 
-      arch = Hardware::CPU.arm? ? "arm64" : "x64"
-      os = OS.linux? ? "linux" : "darwin"
-      suffix = (build.head? && !Hardware::CPU.avx2?) ? "-baseline" : ""
-      target_dir = "opencode-#{os}-#{arch}#{suffix}"
+    # Remove binaries for other architectures, `-musl`, `-baseline`, and `-baseline-musl`
+    arch = Hardware::CPU.arm? ? "arm64" : "x64"
+    os = OS.linux? ? "linux" : "darwin"
+    (libexec/"lib/node_modules/opencode-ai/node_modules").children.each do |d|
+      next unless d.directory?
 
-      rm_r Dir["dist/*"].reject { |dir| File.basename(dir) == target_dir }
-      bin.install "dist/#{target_dir}/bin/opencode"
+      rm_r d if d.basename.to_s != "opencode-#{os}-#{arch}"
     end
   end
 
