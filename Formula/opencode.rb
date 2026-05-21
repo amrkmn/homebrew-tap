@@ -18,8 +18,7 @@ class Opencode < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "178e32189a940f664f32fab93f0b50613270a392a850058b51ae3b5d9d4e1ace"
   end
 
-  # Pinned to 1.3.13 as 1.3.14 give segfaults (exit 139)
-  depends_on "amrkmn/bun/bun@1.3.13" => :build
+  depends_on "amrkmn/bun/bun" => :build
   depends_on "ripgrep"
 
   def install
