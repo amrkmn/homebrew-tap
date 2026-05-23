@@ -5,6 +5,18 @@ class Opencode < Formula
   sha256 "fce00477c705e2cfe9cf9e91cd31b54ac9355a0a83e5c6bd2034f4ffb8aad7e0"
   license "MIT"
 
+  livecheck do
+    url "https://github.com/anomalyco/opencode/releases/latest/download/latest.json"
+    strategy :json do |json|
+      json["version"]
+    end
+  end
+
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "178e32189a940f664f32fab93f0b50613270a392a850058b51ae3b5d9d4e1ace"
+  end
+
   depends_on "node"
   depends_on "ripgrep"
 
