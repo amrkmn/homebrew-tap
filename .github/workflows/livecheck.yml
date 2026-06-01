@@ -5,6 +5,9 @@ on:
     schedule:
         - cron: "45 */3 * * *"
 
+env:
+    HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
+
 jobs:
     livecheck:
         runs-on: ubuntu-24.04
@@ -42,7 +45,7 @@ jobs:
                   jq -c '.[] | select(.status != "skipped") | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
                   name="$(echo "$formula" | jq -r .formula)"
                   new_ver="$(echo "$formula" | jq -r .version.latest)"
-                  
+
                   # Skip if branch already exists remotely
                   if git ls-remote --heads origin "bump-${name}-${new_ver}" | grep -q .; then
                     echo "Skipping $name $new_ver - branch already exists"
