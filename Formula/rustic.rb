@@ -8,7 +8,7 @@ class Rustic < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "78fc02fe248684f45d1e20b545663de847e44dd8399dbe968f1a34a8f6232987"
+    sha256 cellar: :any, x86_64_linux: "7b90b91042f3c339334cf433b415526b6226d919b60a5c86504a470252ceb05b"
   end
 
   depends_on "rust" => :build
