@@ -6,6 +6,11 @@ class Regclient < Formula
   license "Apache-2.0"
   head "https://github.com/regclient/regclient.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any, x86_64_linux: "bef50ab2ca6801809918e762f4e496ae08726ef6465b56ce6404b4db02441985"
+  end
+
   depends_on "go" => :build
 
   def install
