@@ -6,6 +6,11 @@ class DockerCredentialHelper < Formula
   license "MIT"
   head "https://github.com/docker/docker-credential-helpers.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any, x86_64_linux: "4666f6e4e3716e536c23ff54d5da79acd7921ef2c55c613bd6cf415771fa42b3"
+  end
+
   depends_on "go" => :build
   depends_on "pkgconf" => :build
 
