@@ -5,6 +5,11 @@ class GitPages < Formula
   sha256 "6d86eff26ed036ac77a136e7f4c2a31cd7f1860af97eed7bd0b2b2202114acd2"
   license "0BSD"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any, x86_64_linux: "f2c1d4ef46f259cda5747b1b3887aca64675907c41fb10b7246a67ea35722546"
+  end
+
   depends_on "go" => :build
 
   def install
