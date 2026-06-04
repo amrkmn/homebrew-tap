@@ -6,6 +6,11 @@ class Rclone < Formula
   license "MIT"
   head "https://github.com/rclone/rclone.git", branch: "master"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any, x86_64_linux: "65f5c4ee2b623e0a29051011153a4905653e27a631e1e4413c4f69df1cd27a50"
+  end
+
   depends_on "go" => :build
 
   def install
