@@ -6,6 +6,11 @@ class GitPagesCli < Formula
   license "0BSD"
   head "https://codeberg.org/git-pages/git-pages-cli.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any, x86_64_linux: "bcfcfce4ace9e6090d3c4c4e3315b64abdcb20995f4c0c320d372fd945492681"
+  end
+
   depends_on "go" => :build
 
   def install
