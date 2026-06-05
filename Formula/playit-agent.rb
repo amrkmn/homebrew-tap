@@ -19,8 +19,8 @@ class PlayitAgent < Formula
   depends_on "rust" => :build
 
   def install
-    # Patch compiled-in default: /var/run/playitd.sock → #{var}/run/playitd.sock
-    inreplace "packages/playit-ipc/src/paths.rs", "/var/run/playitd.sock", "#{var}/run/playitd.sock"
+    # Patch compiled-in default: /run/playit/playitd.sock → #{var}/run/playit/playitd.sock
+    inreplace "packages/playit-ipc/src/paths.rs", "/run/playit/playitd.sock", "#{var}/run/playit/playitd.sock"
 
     system "cargo", "install", *std_cargo_args(path: "packages/playit-cli")
     system "cargo", "install", *std_cargo_args(path: "packages/playitd")
