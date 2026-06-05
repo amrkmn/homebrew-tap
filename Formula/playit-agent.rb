@@ -13,7 +13,7 @@ class PlayitAgent < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any, x86_64_linux: "f9dbf2491f3858429c75e6338d07f4dc28be8131ba7b68f8e7e5ee7907cdb9c7"
+    sha256 cellar: :any, x86_64_linux: "db623bc2a119ecd95e17bf3e2f7cb7c07736f7b743a87362f8edf17c97967bff"
   end
 
   depends_on "rust" => :build
