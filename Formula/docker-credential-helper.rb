@@ -8,7 +8,7 @@ class DockerCredentialHelper < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any, x86_64_linux: "4666f6e4e3716e536c23ff54d5da79acd7921ef2c55c613bd6cf415771fa42b3"
+    sha256 cellar: :any, x86_64_linux: "6fd7a879ecec47454b28aeab524b6028cd8b8209acdb48be4434009b95aebb8c"
   end
 
   depends_on "go" => :build
