@@ -8,9 +8,7 @@ class Restic < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3bb323395d703527ab283cdb0a90c8bfde100623d9bbc0f9065bcf34023285a1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "523867bea0f34953695e7698f34828308aa23f70db300054c009d25dcd23bf6f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c4800ebeca10b52d656f2f98d080ad8bbdb23efbe502353ca547b0adba21c965"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "37c74e7773a49aeb5a8846dddc43a94da0cf1404f7946634a931f62f9922e415"
   end
 
   depends_on "go" => :build
