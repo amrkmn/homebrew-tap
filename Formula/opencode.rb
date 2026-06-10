@@ -4,13 +4,7 @@ class Opencode < Formula
   url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.16.2.tgz"
   sha256 "18b8181a9fd814df4bf1aaf09ff6d51572c945770e5f71ef21fcf1abc64fa6d7"
   license "MIT"
-
-  livecheck do
-    url "https://github.com/anomalyco/opencode/releases/latest/download/latest.json"
-    strategy :json do |json|
-      json["version"]
-    end
-  end
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
