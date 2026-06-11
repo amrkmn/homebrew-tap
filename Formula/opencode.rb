@@ -4,7 +4,6 @@ class Opencode < Formula
   url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.17.0.tgz"
   sha256 "03c408b03743ca5aaf7f2481ae4abff6f898770ede9f43e82b84aa302df1c5dc"
   license "MIT"
-  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
