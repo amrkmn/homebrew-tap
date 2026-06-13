@@ -13,7 +13,13 @@ class Opencode < Formula
     end
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "600d5301f576080a131ecd690947553503677a25266d3f0a13c5753fb026b921"
+  end
+
   depends_on "bun" => :build
+  depends_on "icu4c@78"
   depends_on "ripgrep"
 
   def install
