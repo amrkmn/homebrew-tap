@@ -1,29 +1,37 @@
 class Opencode < Formula
   desc "AI coding agent, built for the terminal"
-  homepage "https://opencode.ai"
-  url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.17.4.tgz"
-  sha256 "0d44064e1a6d5b806e6d4f1101a61ed59ff83cf22a3299c95ea24ba48b9e4359"
+  homepage "https://opencode.ai/"
+  url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.17.4.tar.gz"
+  sha256 "93c4a643dcd2da3c1e884c29630a978b4f8b13fb92a31c2ade0eca143179a4ab"
   license "MIT"
+  head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
-  bottle do
-    root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "600d5301f576080a131ecd690947553503677a25266d3f0a13c5753fb026b921"
+  livecheck do
+    url "https://github.com/anomalyco/opencode/releases/latest/download/latest.json"
+    strategy :json do |json|
+      json["version"]
+    end
   end
 
-  depends_on "node"
+  depends_on "bun" => :build
   depends_on "ripgrep"
 
   def install
-    system "npm", "install", *std_npm_args(ignore_scripts: false)
-    bin.install_symlink libexec.glob("bin/*")
+    system "bun", "install", *(build.head? ? [] : ["--frozen-lockfile"])
 
-    # Remove binaries for other architectures, `-musl`, `-baseline`, and `-baseline-musl`
-    arch = Hardware::CPU.arm? ? "arm64" : "x64"
-    os = OS.linux? ? "linux" : "darwin"
-    (libexec/"lib/node_modules/opencode-ai/node_modules").children.each do |d|
-      next unless d.directory?
+    cd "packages/opencode" do
+      ENV["OPENCODE_CHANNEL"] = build.head? ? "dev" : "latest"
 
-      rm_r d if d.basename.to_s != "opencode-#{os}-#{arch}"
+      build_baseline = Hardware::CPU.intel? && (!build.head? || !Hardware::CPU.avx2?)
+      build_args = ["run", "./script/build.ts", "--single"]
+      build_args << "--baseline" if build_baseline
+      system "bun", *build_args
+
+      arch = Hardware::CPU.arm? ? "arm64" : "x64"
+      os = OS.linux? ? "linux" : "darwin"
+      suffix = build_baseline ? "-baseline" : ""
+
+      bin.install "dist/opencode-#{os}-#{arch}#{suffix}/bin/opencode"
     end
   end
 
