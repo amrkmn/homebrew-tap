@@ -26,7 +26,10 @@ class Opencode < Formula
     system "bun", "install", *(build.head? ? [] : ["--frozen-lockfile"])
 
     cd "packages/opencode" do
-      ENV["OPENCODE_CHANNEL"] = build.head? ? "dev" : "latest"
+      unless build.head?
+        ENV["OPENCODE_CHANNEL"] = "latest"
+        ENV["OPENCODE_VERSION"] = version.to_s
+      end
 
       build_baseline = Hardware::CPU.intel? && (!build.head? || !Hardware::CPU.avx2?)
       build_args = ["run", "./script/build.ts", "--single"]
