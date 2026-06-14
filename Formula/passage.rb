@@ -8,6 +8,13 @@ class Passage < Formula
   revision 1
   head "https://github.com/FiloSottile/passage.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "a46f3d2477a532897e201d0ddf86cea1bf10ded696bcc6f791ebd77fd6f34a06"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "512934994e48009371b7d6d215026f5fad1c6411ca91bd875d153a528aa3a1ff"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "d5934f34b5f05b86763a44dcf2419c7ae54239dd03e76db7de77138d345c9e17"
+  end
+
   depends_on "age"
   depends_on "qrencode"
   depends_on "tree"
