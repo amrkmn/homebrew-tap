@@ -4,7 +4,7 @@ class Opencode < Formula
   url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.17.6.tar.gz"
   sha256 "ee97b9199d2982c25cf69f535deb0cfbae722f5b89e834365f5acfb1c2c5a358"
   license "MIT"
-  revision 1
+  revision 2
   head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
   livecheck do
@@ -48,6 +48,6 @@ class Opencode < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/opencode --version")
-    assert_match "opencode", shell_output("#{bin}/opencode models")
+    assert_match "Commands:", shell_output("#{bin}/opencode --help")
   end
 end
