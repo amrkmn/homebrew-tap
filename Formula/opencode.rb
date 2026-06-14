@@ -48,6 +48,6 @@ class Opencode < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/opencode --version")
-    assert_match "Commands:", shell_output("#{bin}/opencode --help")
+    assert_match "Commands:", shell_output("#{bin}/opencode --help 2>&1")
   end
 end
