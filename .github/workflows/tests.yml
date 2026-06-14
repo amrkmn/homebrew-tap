@@ -31,8 +31,14 @@ jobs:
     test-bot:
         strategy:
             matrix:
-                os: [ubuntu-24.04]
+                os: [macos-15-intel, macos-26]
+                include:
+                    - os: ubuntu-24.04
+                      container: ghcr.io/homebrew/brew:main
+                    - os: ubuntu-24.04-arm
+                      container: ghcr.io/homebrew/brew:main
         runs-on: ${{ matrix.os }}
+        container: ${{ matrix.container }}
 
         permissions:
             actions: read
@@ -58,7 +64,6 @@ jobs:
             - run: brew test-bot --only-cleanup-before
 
             - run: brew test-bot --only-setup
-              continue-on-error: true
 
             - run: brew test-bot --only-tap-syntax
 
@@ -88,7 +93,7 @@ jobs:
         name: Add 'pr-pull' label to PR
         needs: [test-bot]
         if: github.event_name == 'pull_request' && success()
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         steps:
             - name: Add pr-pull label
               uses: actions-ecosystem/action-add-labels@bd52874380e3909a1ac983768df6976535ece7f8 # v1.1.0
