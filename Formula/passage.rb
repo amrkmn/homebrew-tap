@@ -5,6 +5,7 @@ class Passage < Formula
   version "1.7.4a2"
   sha256 "d4bd97be2eda4249b31c2042707ef70ba50385f6fb7791598f51be794168ee2c"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://github.com/FiloSottile/passage.git", branch: "main"
 
   depends_on "age"
