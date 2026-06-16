@@ -24,6 +24,10 @@ class Opencode < Formula
   depends_on "ripgrep"
 
   def install
+    # Bun's isolated linker hits a macOS build failure in v1.17.7.
+    # Hoisting keeps the build on the conventional node_modules layout.
+    inreplace "bunfig.toml", "exact = true", "exact = true\nlinker = \"hoisted\""
+
     system "bun", "install", *(build.head? ? [] : ["--frozen-lockfile"])
 
     cd "packages/opencode" do
