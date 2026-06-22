@@ -19,9 +19,17 @@ jobs:
             packages: write
         steps:
             - name: Set up Homebrew
+              id: set-up-homebrew
               uses: Homebrew/actions/setup-homebrew@main
               with:
                   token: ${{ secrets.GH_TOKEN }}
+
+            - name: Cache Homebrew Bundler RubyGems
+              uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+              with:
+                  path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+                  key: ${{ runner.os }}-${{ runner.arch }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+                  restore-keys: ${{ runner.os }}-${{ runner.arch }}-rubygems-
 
             - name: Set up git
               uses: Homebrew/actions/git-user-config@main
