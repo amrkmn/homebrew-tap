@@ -6,6 +6,13 @@ class Surge < Formula
   license "MIT"
   head "https://github.com/SurgeDM/Surge.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "61cb4122c32e155f2bb82a0fc34db4fe0d766c24118e254634bfe1e152b09726"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "8660ae7d3ddee33b66311ba2a8c854a96a3b87f8eb2f8376395f2cd8e5f47f07"
+    sha256 cellar: :any,                 x86_64_linux: "b2590b9717ad49a2c9a399941d367a5b6ff380aab8c7778fc1501ced96936899"
+  end
+
   depends_on "go" => :build
 
   def install
