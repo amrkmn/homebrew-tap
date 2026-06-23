@@ -7,6 +7,11 @@ class Surge < Formula
   revision 1
   head "https://github.com/SurgeDM/Surge.git", branch: "main"
 
+  livecheck do
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
+
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
     sha256 cellar: :any_skip_relocation, arm64_tahoe:  "17a850fb416b314c33fd46ef8b9b05e4bd0b2d5a63e70964d40c3c84f4c4ae97"
