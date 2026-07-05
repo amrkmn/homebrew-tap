@@ -6,6 +6,13 @@ class CloudflareSpeedCli < Formula
   license "GPL-3.0-only"
   head "https://github.com/kavehtehrani/cloudflare-speed-cli.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "718b920b74f28a10727ce60decb271358b152c3e0e52cd2a830850bd2765bdc4"
+    sha256 cellar: :any,                 arm64_linux:  "4f9213c54443a47e0cb581b184cc8f87e06e740e8ddbe7a0b3427a7d611d17e0"
+    sha256 cellar: :any,                 x86_64_linux: "9c69c9e6faf82465c1ae80c7a5e892e51f30329126f6b4cd4ad081c9b301d140"
+  end
+
   depends_on "rust" => :build
 
   def install
