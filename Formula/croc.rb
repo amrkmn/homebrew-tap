@@ -20,25 +20,25 @@ class Croc < Formula
   end
 
   test do
-      # As of https://github.com/schollz/croc/pull/701 an alternate method is used to provide the secret code
-      ENV["CROC_SECRET"] = "homebrew-test"
+    # As of https://github.com/schollz/croc/pull/701 an alternate method is used to provide the secret code
+    ENV["CROC_SECRET"] = "homebrew-test"
 
-      ports = [free_port, free_port]
+    ports = [free_port, free_port]
 
-      require "pty"
-      pid = PTY.spawn(bin/"croc", "relay", "--ports", ports.join(",")).last
-      sleep 3
+    require "pty"
+    pid = PTY.spawn(bin/"croc", "relay", "--ports", ports.join(",")).last
+    sleep 3
 
-      pid_send = PTY.spawn(bin/"croc", "--relay=localhost:#{ports.first}", "send",
-                                       "--no-local", "--text=mytext", "--transfers=1").last
-      sleep 3
+    pid_send = PTY.spawn(bin/"croc", "--relay=localhost:#{ports.first}", "send",
+                                      "--no-local", "--text=mytext", "--transfers=1").last
+    sleep 3
 
-      output = shell_output("#{bin}/croc --relay localhost:#{ports.first} --overwrite --yes")
-      assert_match "mytext", output
-    ensure
-      Process.kill("TERM", pid_send)
-      Process.kill("TERM", pid)
-      Process.wait(pid_send)
-      Process.wait(pid)
-    end
+    output = shell_output("#{bin}/croc --relay localhost:#{ports.first} --overwrite --yes")
+    assert_match "mytext", output
+  ensure
+    Process.kill("TERM", pid_send)
+    Process.kill("TERM", pid)
+    Process.wait(pid_send)
+    Process.wait(pid)
+  end
 end
