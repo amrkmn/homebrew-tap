@@ -1,8 +1,8 @@
 class DockerCredentialPassage < Formula
   desc "Docker credential helper using age encryption"
   homepage "https://github.com/amrkmn/docker-credential-passage"
-  url "https://github.com/amrkmn/docker-credential-passage/archive/refs/tags/v0.2.0.tar.gz"
-  sha256 "35b42c1c582a4c961ed1710028e7f9cd8f54e5f76d341ba6375bacfaee627d69"
+  url "https://github.com/amrkmn/docker-credential-passage/archive/refs/tags/v0.3.1.tar.gz"
+  sha256 "bc48adb9d1d3ec6451179f3bb457b2e4063d772e85a45c54afe7ee7200d68851"
   license "MIT"
 
   bottle do
@@ -13,7 +13,7 @@ class DockerCredentialPassage < Formula
   depends_on "go" => :build
 
   def install
-    system "go", "build", *std_go_args(ldflags: "-s -w -X main.Version=#{version}"), "./passage/cmd"
+    system "go", "build", *std_go_args(ldflags: "-s -w -X main.Version=v#{version}"), "./cmd/docker-credential-passage/main.go"
   end
 
   test do
