@@ -1,8 +1,8 @@
 class Croc < Formula
   desc "Securely send things from one computer to another"
   homepage "https://schollz.com/software/croc6"
-  url "https://github.com/schollz/croc/archive/refs/tags/v10.4.5.tar.gz"
-  sha256 "e313d92ac881c8bcdb926ebb26e353a804e47cf0099a0670ab9bd31cef8fc680"
+  url "https://github.com/schollz/croc/archive/refs/tags/v10.4.7.tar.gz"
+  sha256 "fda871fe2f0ed5fdf2248f1ab4d6d88aea08d3582a3a1d2e3e38e916662c7f22"
   license "MIT"
   head "https://github.com/schollz/croc.git", branch: "main"
 
@@ -20,22 +20,25 @@ class Croc < Formula
   end
 
   test do
-    # As of https://github.com/schollz/croc/pull/701 an alternate method is used to provide the secret code
-    ENV["CROC_SECRET"] = "homebrew-test"
+      # As of https://github.com/schollz/croc/pull/701 an alternate method is used to provide the secret code
+      ENV["CROC_SECRET"] = "homebrew-test"
 
-    port=free_port
-    port2=port+1
+      ports = [free_port, free_port]
 
-    fork do
-      exec bin/"croc", "relay", "--ports=#{port},#{port2}"
+      require "pty"
+      pid = PTY.spawn(bin/"croc", "relay", "--ports", ports.join(",")).last
+      sleep 3
+
+      pid_send = PTY.spawn(bin/"croc", "--relay=localhost:#{ports.first}", "send",
+                                       "--no-local", "--text=mytext", "--transfers=1").last
+      sleep 3
+
+      output = shell_output("#{bin}/croc --relay localhost:#{ports.first} --overwrite --yes")
+      assert_match "mytext", output
+    ensure
+      Process.kill("TERM", pid_send)
+      Process.kill("TERM", pid)
+      Process.wait(pid_send)
+      Process.wait(pid)
     end
-    sleep 3
-
-    fork do
-      exec bin/"croc", "--relay=localhost:#{port}", "send", "--code=homebrew-test", "--text=mytext"
-    end
-    sleep 3
-
-    assert_match shell_output("#{bin}/croc --relay=localhost:#{port} --overwrite --yes homebrew-test").chomp, "mytext"
-  end
 end
