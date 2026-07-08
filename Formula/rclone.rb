@@ -8,7 +8,9 @@ class Rclone < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any, x86_64_linux: "d9bb6274c7635323879943cb33cee53e6df47a792737002996626e47f3e2a88c"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "0b0fc20ca4516d74bbbe0360efc8dd07786e109b9726521c1f6260052e421833"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "50c616247940e797ca777853fc910815f1a01b676f4b491bcebfb8ce1f37515c"
+    sha256 cellar: :any,                 x86_64_linux: "96e715c2506cdce066191ea00b8f0349b8ee6765d55282ce9dbd51bc7952018e"
   end
 
   depends_on "go" => :build
