@@ -8,9 +8,9 @@ class CloudflareSpeedCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "718b920b74f28a10727ce60decb271358b152c3e0e52cd2a830850bd2765bdc4"
-    sha256 cellar: :any,                 arm64_linux:  "4f9213c54443a47e0cb581b184cc8f87e06e740e8ddbe7a0b3427a7d611d17e0"
-    sha256 cellar: :any,                 x86_64_linux: "9c69c9e6faf82465c1ae80c7a5e892e51f30329126f6b4cd4ad081c9b301d140"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "950c4033b835d9912d28777f6677d720a20c72a80483cf9d1f05f4a248dc8934"
+    sha256 cellar: :any,                 arm64_linux:  "97669718e9ff30a7fcce3790c411f06af348f0068bc0f4eb6765dd757dea6343"
+    sha256 cellar: :any,                 x86_64_linux: "2898fdd611a1eb5ac1f65b346571aabb9e98f3038a3a9b3f5a77751004c3d201"
   end
 
   depends_on "rust" => :build
