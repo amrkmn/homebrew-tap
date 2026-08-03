@@ -1,8 +1,8 @@
 class Surge < Formula
   desc "Blazing fast TUI download manager built in Go for power users"
   homepage "https://github.com/SurgeDM/Surge"
-  url "https://github.com/SurgeDM/Surge/archive/refs/tags/v0.11.0.tar.gz"
-  sha256 "aa2b646f9719a50fe791b480b50c4eede471785d047020506e9ac207310e9c4f"
+  url "https://github.com/SurgeDM/Surge/archive/refs/tags/v0.11.2.tar.gz"
+  sha256 "a8c9cb5c8af161959a89bbbae551a9fe28180d6c5e5315d03a1b7b5cc730d102"
   license "MIT"
   head "https://github.com/SurgeDM/Surge.git", branch: "main"
 
