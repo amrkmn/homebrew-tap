@@ -66,10 +66,7 @@ jobs:
               if: github.event_name == 'pull_request'
               env:
                   TOKEN: ${{ secrets.GH_TOKEN }}
-              run: |
-                  base64_token=$(echo -n "${TOKEN}" | base64 | tr -d "\n")
-                  echo "::add-mask::${base64_token}"
-                  echo "token=${base64_token}" >> "${GITHUB_OUTPUT}"
+              run: bash .github/scripts/base64-token.sh
 
             - run: brew test-bot --only-formulae --root-url=https://ghcr.io/v2/amrkmn/tap
               if: github.event_name == 'pull_request'

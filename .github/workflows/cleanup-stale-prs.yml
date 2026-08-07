@@ -1,0 +1,39 @@
+name: cleanup stale bump PRs
+
+on:
+    workflow_dispatch:
+    schedule:
+        # Run shortly before livecheck (livecheck runs at :45 every 3 hours)
+        # so stale branches are cleaned up before the next bump attempt.
+        - cron: "30 */3 * * *"
+
+env:
+    HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
+
+jobs:
+    cleanup:
+        runs-on: ubuntu-24.04
+        permissions:
+            contents: write
+            pull-requests: write
+        steps:
+            - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+            - name: Close stale/failed bump PRs
+              id: cleanup
+              env:
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                  MAX_AGE_DAYS: 3
+              run: bash .github/scripts/cleanup-stale-prs.sh
+
+            - name: Send ntfy notification
+              if: steps.cleanup.outputs.closed != ''
+              env:
+                  NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+                  NTFY_AUTH: ${{ secrets.NTFY_AUTH }}
+                  NTFY_URL: ${{ secrets.NTFY_URL }}
+              run: |
+                  NOTIFICATION="🧹 Stale bump PRs closed\n\n"
+                  NOTIFICATION="${NOTIFICATION}${{ steps.cleanup.outputs.closed }}"
+                  bash .github/scripts/ntfy.sh "Homebrew Stale PR Cleanup" "$NOTIFICATION"
+              continue-on-error: true

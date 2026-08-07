@@ -31,9 +31,7 @@ jobs:
                   restore-keys: ${{ runner.os }}-${{ runner.arch }}-rubygems-
 
             - name: Run livecheck
-              run: |
-                  brew livecheck --tap="$GITHUB_REPOSITORY" --json > livecheck.json
-                  jq -c '.[] | select(.status != "skipped") | select(.version.latest != .version.current)' livecheck.json
+              run: bash .github/scripts/livecheck.sh
 
             - name: Configure Git user
               uses: Homebrew/actions/git-user-config@main
@@ -42,125 +40,41 @@ jobs:
 
             - name: Bump outdated formulae
               id: bump
-              run: |
-                  # Formulae that require manual updates (e.g., pip dependency resolution issues)
-                  SKIP_FORMULAE=("yt-dlp")
-
-                  SKIPPED=""
-                  BUMPED=""
-                  FAILED=""
-
-                  jq -c '.[] | select(.status != "skipped") | select(.version.latest != .version.current)' livecheck.json | while read -r formula; do
-                    name="$(echo "$formula" | jq -r .formula)"
-                    new_ver="$(echo "$formula" | jq -r .version.latest)"
-
-                    # Check if this formula should be skipped
-                    skip=false
-                    for skip_name in "${SKIP_FORMULAE[@]}"; do
-                      if [[ "$name" == "$skip_name" ]]; then
-                        echo "⏭️  Skipping $name $new_ver (requires manual update)"
-                        SKIPPED="${SKIPPED}${name}@${new_ver}\n"
-                        skip=true
-                        break
-                      fi
-                    done
-                    [[ "$skip" == true ]] && continue
-
-                    # Skip if branch already exists remotely
-                    if git ls-remote --heads origin "bump-${name}-${new_ver}" | grep -q .; then
-                      echo "Skipping $name $new_ver - branch already exists"
-                      continue
-                    fi
-
-                    if brew bump-formula-pr \
-                      --no-audit --no-browse --force \
-                      --version="$new_ver" \
-                      "amrkmn/tap/${name}" 2>&1; then
-                      echo "✅ Bumped $name to $new_ver"
-                      BUMPED="${BUMPED}${name}@${new_ver}\n"
-                    else
-                      echo "❌ Failed to bump $name to $new_ver"
-                      FAILED="${FAILED}${name}@${new_ver}\n"
-                    fi
-                  done
-
-                  # Save to environment for next step
-                  {
-                    echo "skipped<<EOF"
-                    echo -e "$SKIPPED"
-                    echo "EOF"
-                    echo "bumped<<EOF"
-                    echo -e "$BUMPED"
-                    echo "EOF"
-                    echo "failed<<EOF"
-                    echo -e "$FAILED"
-                    echo "EOF"
-                  } >> "$GITHUB_OUTPUT"
+              run: bash .github/scripts/bump-formulae.sh
               env:
                   HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
                   GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
             - name: Send ntfy notification
               if: steps.bump.outputs.skipped != '' || steps.bump.outputs.failed != '' || steps.bump.outputs.bumped != ''
+              env:
+                  NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+                  NTFY_AUTH: ${{ secrets.NTFY_AUTH }}
+                  NTFY_URL: ${{ secrets.NTFY_URL }}
               run: |
                   NOTIFICATION="🍺 Homebrew Livecheck Report\n\n"
 
                   if [[ -n "${{ steps.bump.outputs.skipped }}" ]]; then
                     NOTIFICATION="${NOTIFICATION}⏭️ Skipped (requires manual update):\n${{ steps.bump.outputs.skipped }}\n"
                   fi
-
                   if [[ -n "${{ steps.bump.outputs.bumped }}" ]]; then
                     NOTIFICATION="${NOTIFICATION}✅ Successfully bumped:\n${{ steps.bump.outputs.bumped }}\n"
                   fi
-
                   if [[ -n "${{ steps.bump.outputs.failed }}" ]]; then
                     NOTIFICATION="${NOTIFICATION}❌ Failed to bump:\n${{ steps.bump.outputs.failed }}"
                   fi
 
-                  # Support both Bearer token and Basic auth
-                  if [[ -n "${{ secrets.NTFY_TOKEN }}" ]]; then
-                    # Bearer token authentication
-                    curl -X POST \
-                      -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
-                      -H "Title: Homebrew Formula Update Alert" \
-                      -d "$(echo -e "$NOTIFICATION")" \
-                      "${{ secrets.NTFY_URL }}/homebrew-tap"
-                  elif [[ -n "${{ secrets.NTFY_AUTH }}" ]]; then
-                    # Basic auth (username:password in base64)
-                    curl -X POST \
-                      -H "Authorization: Basic ${{ secrets.NTFY_AUTH }}" \
-                      -H "Title: Homebrew Formula Update Alert" \
-                      -d "$(echo -e "$NOTIFICATION")" \
-                      "${{ secrets.NTFY_URL }}/homebrew-tap"
-                  else
-                    # No auth
-                    curl -X POST \
-                      -H "Title: Homebrew Formula Update Alert" \
-                      -d "$(echo -e "$NOTIFICATION")" \
-                      "${{ secrets.NTFY_URL }}/homebrew-tap"
-                  fi
+                  bash .github/scripts/ntfy.sh "Homebrew Formula Update Alert" "$NOTIFICATION"
               continue-on-error: true
 
             - name: Send ntfy notification on workflow failure
               if: failure()
+              env:
+                  NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+                  NTFY_AUTH: ${{ secrets.NTFY_AUTH }}
+                  NTFY_URL: ${{ secrets.NTFY_URL }}
               run: |
-                  # Support both Bearer token and Basic auth
-                  if [[ -n "${{ secrets.NTFY_TOKEN }}" ]]; then
-                    curl -X POST \
-                      -H "Authorization: Bearer ${{ secrets.NTFY_TOKEN }}" \
-                      -H "Title: ❌ Homebrew Livecheck Failed" \
-                      -d "The livecheck workflow failed. Check the logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-                      "${{ secrets.NTFY_URL }}/homebrew-tap"
-                  elif [[ -n "${{ secrets.NTFY_AUTH }}" ]]; then
-                    curl -X POST \
-                      -H "Authorization: Basic ${{ secrets.NTFY_AUTH }}" \
-                      -H "Title: ❌ Homebrew Livecheck Failed" \
-                      -d "The livecheck workflow failed. Check the logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-                      "${{ secrets.NTFY_URL }}/homebrew-tap"
-                  else
-                    curl -X POST \
-                      -H "Title: ❌ Homebrew Livecheck Failed" \
-                      -d "The livecheck workflow failed. Check the logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-                      "${{ secrets.NTFY_URL }}/homebrew-tap"
-                  fi
+                  bash .github/scripts/ntfy.sh \
+                      "❌ Homebrew Livecheck Failed" \
+                      "The livecheck workflow failed. Check the logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               continue-on-error: true
