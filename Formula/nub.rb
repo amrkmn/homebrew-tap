@@ -7,9 +7,9 @@ class Nub < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "c430c30b15d70a6997a2f5c814167c5b4b4b1613f4fe06f7f94f5ce607f02998"
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "bf06b271317d95d1cfcf43b35df4f46ca4d3d0aa6b0531c234e45817001e76ff"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "616d882da7961efdf5e61a4a8337dae729f932c5a2e2aa7f4f58ac4a77a1829e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "30d33b0d18c4955f02ff454763c93952fe991c90d92596966a4d07a3c2f570b3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "22cd76eb55912c220ea09ec53360a6f39261b6cf0d59f94306df3c09af5b1b2c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "ce6cf1bc95a790c6a13a7de6fde4375982647dd99beb18ce2fda41576575d294"
   end
 
   depends_on "node"
