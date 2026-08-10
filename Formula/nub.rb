@@ -1,8 +1,8 @@
 class Nub < Formula
   desc "Fast all-in-one Node.js toolkit"
   homepage "https://nubjs.com"
-  url "https://registry.npmjs.org/@nubjs/nub/-/nub-0.7.2.tgz"
-  sha256 "d9b7500a617a3e7cf9d00db995aac129f15d497c05ca15914e2f0ff5d4f7d46a"
+  url "https://registry.npmjs.org/@nubjs/nub/-/nub-0.7.5.tgz"
+  sha256 "610efc05dbb4f212f2b5db36546ea889abec018bdf81c18955f3d0da8dbc16ca"
   license "MIT"
 
   bottle do
