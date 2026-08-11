@@ -5,7 +5,7 @@
 set -euo pipefail
 
 # Formulae that require manual updates (e.g., pip dependency resolution issues)
-SKIP_FORMULAE=("yt-dlp")
+SKIP_FORMULAE=("")
 
 SKIPPED=""
 BUMPED=""
