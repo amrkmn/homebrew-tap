@@ -1,8 +1,8 @@
 class LibrespeedCli < Formula
   desc "Command-line client for LibreSpeed"
   homepage "https://github.com/librespeed/speedtest-cli"
-  url "https://github.com/librespeed/speedtest-cli/archive/refs/tags/v1.0.13.tar.gz"
-  sha256 "5ad938b61e3edc0ca95e2ccff0c06e97a69383f3cbb0243bd47b21b9865f9f55"
+  url "https://github.com/librespeed/speedtest-cli/archive/refs/tags/v1.0.14.tar.gz"
+  sha256 "3031e0f7babd7f9c51a1c49b95026d12532668455e8cc459049160f1bd525bf3"
   license "LGPL-3.0-only"
   head "https://github.com/librespeed/speedtest-cli.git", branch: "master"
 
