@@ -4,6 +4,7 @@ class Opencode < Formula
   url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.18.18.tar.gz"
   sha256 "9962680e6ea7b59e002b2940a1f33f31f147fea4e976df2ea5501bc70ed2fb83"
   license "MIT"
+  revision 1
   head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
   livecheck do
@@ -20,13 +21,12 @@ class Opencode < Formula
   end
 
   depends_on "bun" => :build
-  depends_on "icu4c@78"
   depends_on "ripgrep"
 
   def install
     # Bun's isolated linker hits a macOS build failure in v1.17.7.
     # Hoisting keeps the build on the conventional node_modules layout.
-    inreplace "bunfig.toml", "exact = true", "exact = true\nlinker = \"hoisted\""
+    # inreplace "bunfig.toml", "exact = true", "exact = true\nlinker = \"hoisted\""
 
     system "bun", "install", *(build.head? ? [] : ["--frozen-lockfile"])
 
