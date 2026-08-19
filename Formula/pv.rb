@@ -10,6 +10,13 @@ class Pv < Formula
     strategy :git
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 arm64_tahoe:  "83bf00fa156509b44dfafb8c31d0758b1f08779ca8e33f366aaed4c04c819443"
+    sha256 arm64_linux:  "bbdccca4c103edc20240f33a9d1f4d135954d0c4955d99d79007a1ce9c675cb0"
+    sha256 x86_64_linux: "94c75d7387523a5da62603b327a3dbd37e8615f2d63dc7253d821e71c5e7a0bf"
+  end
+
   uses_from_macos "ncurses"
 
   on_macos do
