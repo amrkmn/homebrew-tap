@@ -17,6 +17,10 @@ class Opencode < Formula
   depends_on "bun" => :build
   depends_on "ripgrep"
 
+  on_linux do
+    depends_on "icu4c@78"
+  end
+
   def install
     system "bun", "install", *(build.head? ? [] : ["--frozen-lockfile"])
 
