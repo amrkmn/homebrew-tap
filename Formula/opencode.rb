@@ -5,13 +5,12 @@ class Opencode < Formula
   sha256 "10129b7a233d8ea227fe8a65c158d3df4adc3d1296e3af5a136d94080b25a630"
   license "MIT"
   revision 1
+  head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
   livecheck do
     url :stable
     strategy :github_latest
   end
-
-  head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
