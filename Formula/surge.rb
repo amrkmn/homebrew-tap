@@ -13,9 +13,9 @@ class Surge < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "96ac40c8c904096a8ffa0fb6bc4ab4eb76c985a8e947b8f1c82fec5bf70888aa"
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "6aab8a9ec6886afc29a39ac5dfdf07ab6cf166f702e4ff7bb6d282f387525b1f"
-    sha256 cellar: :any,                 x86_64_linux: "3802d4197def5d2c820b58c708ee4fcc2174a9413733848f5a3ba1c1395ddbf2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "2b141f3200bda13356df888c57dd7634217550d216426bfbf07ceaee96b27b25"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "3c7617d884d01491cef47ad55b4f5da7e69476111ea898047d2fb6fe97cec2eb"
+    sha256 cellar: :any,                 x86_64_linux: "8cb8607808bc1a6834e2d66b4ea3bd853d86a2b316afe6692ab7765a3e24b480"
   end
 
   depends_on "go" => :build
