@@ -38,11 +38,12 @@ class Croc < Formula
     end
     flunk "croc relay did not start" unless relay_ready
 
-    pid_send = PTY.spawn(bin/"croc", "--relay=localhost:#{ports.first}", "send",
+    pid_send = PTY.spawn(bin/"croc", "--transport=relay",
+                                     "--relay=localhost:#{ports.first}", "send",
                                      "--no-local", "--text=mytext", "--transfers=1").last
     sleep 3
 
-    output = shell_output("#{bin}/croc --relay localhost:#{ports.first} --overwrite --yes")
+    output = shell_output("#{bin}/croc --transport=relay --relay localhost:#{ports.first} --overwrite --yes")
     assert_match "mytext", output
   ensure
     Process.kill("TERM", pid_send)
