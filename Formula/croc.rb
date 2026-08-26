@@ -26,8 +26,17 @@ class Croc < Formula
     ports = [free_port, free_port]
 
     require "pty"
+    require "socket"
     pid = PTY.spawn(bin/"croc", "relay", "--ports", ports.join(",")).last
-    sleep 3
+    relay_ready = false
+    60.times do
+      TCPSocket.new("localhost", ports.first).close
+      relay_ready = true
+      break
+    rescue SystemCallError
+      sleep 0.5
+    end
+    flunk "croc relay did not start" unless relay_ready
 
     pid_send = PTY.spawn(bin/"croc", "--relay=localhost:#{ports.first}", "send",
                                      "--no-local", "--text=mytext", "--transfers=1").last
