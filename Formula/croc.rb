@@ -1,6 +1,6 @@
 class Croc < Formula
   desc "Securely send things from one computer to another"
-  homepage "https://schollz.com/software/croc6"
+  homepage "https://getcroc.com/"
   url "https://github.com/schollz/croc/archive/refs/tags/v11.3.0.tar.gz"
   sha256 "2af2b2cc379c4a913ee471e7ce157d6bb4ec7a391f0f26f6b870e9422c3ff55b"
   license "MIT"
@@ -30,7 +30,7 @@ class Croc < Formula
     sleep 3
 
     pid_send = PTY.spawn(bin/"croc", "--relay=localhost:#{ports.first}", "send",
-                                      "--no-local", "--text=mytext", "--transfers=1").last
+                                     "--no-local", "--text=mytext", "--transfers=1").last
     sleep 3
 
     output = shell_output("#{bin}/croc --relay localhost:#{ports.first} --overwrite --yes")
