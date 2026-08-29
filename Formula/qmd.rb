@@ -10,6 +10,17 @@ class Qmd < Formula
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink libexec.glob("bin/*")
+
+    os = OS.mac? ? "darwin" : "linux"
+    arch = Hardware::CPU.intel? ? "x64" : "arm64"
+
+    # Remove non-native architecture prebuilds
+    libexec.glob("lib/node_modules/@tobilu/qmd/node_modules/@node-llama-cpp/*").each do |dir|
+      rm_r dir if dir.basename.to_s != "#{os}-#{arch}"
+    end
+    libexec.glob("lib/node_modules/@tobilu/qmd/node_modules/*/prebuilds/*").each do |dir|
+      rm_r dir unless dir.basename.to_s.start_with?("#{os}-#{arch}")
+    end
   end
 
   test do
