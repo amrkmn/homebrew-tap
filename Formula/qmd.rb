@@ -21,6 +21,17 @@ class Qmd < Formula
     libexec.glob("lib/node_modules/@tobilu/qmd/node_modules/*/prebuilds/*").each do |dir|
       rm_r dir unless dir.basename.to_s.start_with?("#{os}-#{arch}")
     end
+
+    # Some upstream packages mislabel prebuilds (e.g. a linux-arm64 build that
+    # is actually x86_64), so verify the real architecture of what remains.
+    native = Hardware::CPU.arm? ? ["aarch64", "arm64"] : ["x86-64", "x86_64"]
+    foreign = Hardware::CPU.arm? ? ["x86-64", "x86_64"] : ["aarch64", "arm64"]
+    libexec.glob("lib/node_modules/**/*.{node,so}").each do |file|
+      next unless file.file?
+
+      out = Utils.safe_popen_read("file", "-b", file.to_s)
+      rm file if foreign.any? { |arch| out.include?(arch) } && native.none? { |arch| out.include?(arch) }
+    end
   end
 
   test do
