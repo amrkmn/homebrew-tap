@@ -5,6 +5,13 @@ class Qmd < Formula
   sha256 "2e60829913a0c646234a905cefd61043167a1392fdcfd19bc54f890af89ca0f0"
   license "MIT"
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 cellar: :any, arm64_tahoe:  "e63d2ea6d3d05e12062bc90b628156e342dfa31020af0872eb8fc63967c8e24e"
+    sha256 cellar: :any, arm64_linux:  "62fdadc217b4fb200f93c4d95aa6477a0f70dabd9334064d514da63d073a4dc6"
+    sha256 cellar: :any, x86_64_linux: "7828563a3cb4a554230a1410a3464f4b13894a59770785df99ceccad33ce1114"
+  end
+
   depends_on "node"
 
   def install
