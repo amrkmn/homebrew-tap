@@ -8,9 +8,9 @@ class Croc < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "440ba02d67279d04b615723e1a03b35e0e3989a438c7ed3e4da5466324a9f354"
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "b0550615064cfc815f2edbc6838c7b3bdff7817eb2c0720e397996d3093d4d71"
-    sha256 cellar: :any,                 x86_64_linux: "c0727a749921727471c1e29ca27d2fced134d036dcac401d21b07a3a2ccbbff3"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "ef6a3461ce1cd820ea84a5953cdbd8b180c6f687738a4607c5a87770de3b413e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "a520b0c0341758e051fc3cffdae98a51a47e9e3dbeb8f9195dfb0278dc2c7ec0"
+    sha256 cellar: :any,                 x86_64_linux: "94529b4120a214c2a45f719e06ba05bb744978770285d8662cd5f4afd6e6e883"
   end
 
   depends_on "go" => :build
