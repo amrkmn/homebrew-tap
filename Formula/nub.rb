@@ -22,16 +22,11 @@ class Nub < Formula
   depends_on "rust" => :build
 
   def install
-    # `runtime` has no package.json, so npm resolves up to the repository root
-    # either way. Install there, where package-lock.json pins the versions.
+    # Install at the repo root, where package-lock.json pins versions.
     system "npm", "install", *std_npm_args(prefix: false)
 
-    # The `embed-runtime` feature tars `runtime` into the binary, and the tree that
-    # binary extracts at runtime has no parent node_modules to resolve through. Copy
-    # in the packages that tree loads: the transpile helpers and the web API
-    # polyfills. Without them the build still succeeds, but the binary fails to run
-    # any file that needs a helper and silently drops Temporal, URLPattern and
-    # Float16Array on Node versions that lack them natively.
+    # The embedded runtime's tree has no parent node_modules to resolve through,
+    # so vendor the helpers and web API polyfills it loads.
     %w[
       @js-temporal/polyfill
       @oxc-project/runtime
@@ -64,9 +59,8 @@ class Nub < Formula
       }
     JSON
 
-    # Transpile a file that pulls a helper out of the vendored runtime node_modules.
-    # Legacy decorators are down-levelled on every Node version, so this covers the
-    # embedded runtime whichever Node is on PATH.
+    # Transpile a file that loads a helper from the vendored runtime node_modules.
+    # Legacy decorators are down-levelled on every Node, covering the embedded runtime.
     (testpath/"tsconfig.json").write <<~JSON
       {"compilerOptions": {"experimentalDecorators": true, "emitDecoratorMetadata": true}}
     JSON
