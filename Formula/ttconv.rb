@@ -3,8 +3,8 @@ class Ttconv < Formula
 
   desc "Library for conversion of common timed text formats"
   homepage "https://github.com/sandflow/ttconv"
-  url "https://files.pythonhosted.org/packages/52/e8/c514652a91728a5b1ce01fab2cf8d59aeddf3e565a455861db991e5c2403/ttconv-1.2.2.tar.gz"
-  sha256 "c0597dc04d1076192b94156dbe9d1e7e113d1323a1802ecaa062ccdf70b04d16"
+  url "https://files.pythonhosted.org/packages/fd/d4/1f93adb12852678c02d1ad4805a190055cb4d32d89d4d2d0cc0163956ab0/ttconv-1.2.3.tar.gz"
+  sha256 "74c8e12e5a591e42051606c27795835b663ee955bcd571835e7d884567335d74"
   license "BSD-2-Clause"
 
   bottle do
