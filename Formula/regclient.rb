@@ -8,7 +8,9 @@ class Regclient < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any, x86_64_linux: "bef50ab2ca6801809918e762f4e496ae08726ef6465b56ce6404b4db02441985"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "7f8672e9f694f4c444ad94a590eaa3747f1c1d319ddc844c1bf798c2cc2cc803"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "56cce8142f7cf98138ec6913bbb01864c33217f40b28c467e395f1708c8387f3"
+    sha256 cellar: :any,                 x86_64_linux: "b960cf13ba768b1b54582dbbd279b665f02761d54dd1b247a492a1096d7a96b3"
   end
 
   depends_on "go" => :build
