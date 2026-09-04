@@ -13,9 +13,9 @@ class Opencode < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256                               arm64_tahoe:  "4237b931e3e8265d42bd58562b618c3251cff3a55e2162ec5c675b3e6f1f2731"
-    sha256                               arm64_linux:  "905c274ebe19cbf990c3405cf614a9c083c02d01fc354844d0e5dfc4a28e9dc4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "435f36dbdf0d172d96146ec1621fa3ce919657b3e6ee4382ed8cfbb83e971424"
+    sha256                               arm64_tahoe:  "dc59265a36a158b330d29365d54968a46fe2d9841e80637d71815c6f61125c53"
+    sha256                               arm64_linux:  "8b313b762d53aaed0ae0cc1720032864a8b246f7761cc557aca11e4e194b1935"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "768e70fb24f7c26b70ed01ff100124124d730de8ee92bcf8ffde40ec50abc9bf"
   end
 
   depends_on "bun" => :build
