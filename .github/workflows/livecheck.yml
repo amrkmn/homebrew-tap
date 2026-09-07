@@ -5,9 +5,6 @@ on:
     schedule:
         - cron: "45 */3 * * *"
 
-env:
-    HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
-
 jobs:
     livecheck:
         runs-on: ubuntu-24.04
