@@ -4,6 +4,7 @@ class Opencode < Formula
   url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.18.31.tar.gz"
   sha256 "76f69fe27ec2b44e23fa1749029e7c012eb7e975a0f0c7819e9458198dfd3896"
   license "MIT"
+  revision 1
   head "https://github.com/anomalyco/opencode.git", branch: "dev"
 
   livecheck do
@@ -19,36 +20,42 @@ class Opencode < Formula
   end
 
   depends_on "bun" => :build
+  depends_on "python@3.14" => :build
   depends_on "ripgrep"
 
   on_linux do
     depends_on "icu4c@78"
   end
 
+  deny_network_access! :test
+
   def install
-    system "bun", "install", *(build.head? ? [] : ["--frozen-lockfile"])
+    unless build.head?
+      ENV["OPENCODE_CHANNEL"] = "prod"
+      ENV["OPENCODE_VERSION"] = version.to_s
+    end
+
+    # Fix server errors when building with Bun 1.4.2 by disabling splitting
+    # https://github.com/anomalyco/opencode/issues/48645
+    # https://github.com/NixOS/nixpkgs/issues/563241
+    inreplace "packages/opencode/script/build.ts", "splitting: true,", "splitting: false,"
+
+    system "bun", "install", "--frozen-lockfile"
 
     cd "packages/opencode" do
-      unless build.head?
-        ENV["OPENCODE_CHANNEL"] = "latest"
-        ENV["OPENCODE_VERSION"] = version.to_s
-      end
+      baseline = Hardware::CPU.intel? && (!build.head? || !Hardware::CPU.avx2?)
+      args = ["run", "./script/build.ts", "--single", "--skip-install"]
+      args << "--baseline" if baseline
+      system "bun", "--bun", *args
 
-      build_baseline = Hardware::CPU.intel? && (!build.head? || !Hardware::CPU.avx2?)
-      build_args = ["run", "./script/build.ts", "--single"]
-      build_args << "--baseline" if build_baseline
-      system "bun", *build_args
-
-      arch = Hardware::CPU.arm? ? "arm64" : "x64"
-      os = OS.linux? ? "linux" : "darwin"
-      suffix = build_baseline ? "-baseline" : ""
-
-      bin.install "dist/opencode-#{os}-#{arch}#{suffix}/bin/opencode"
+      bin.install Dir["dist/opencode-*/bin/opencode"].find { |p| p.include?("baseline") == baseline }
     end
   end
 
   test do
+    ENV["OPENCODE_DISABLE_MODELS_FETCH"] = "1"
+
     assert_match version.to_s, shell_output("#{bin}/opencode --version")
-    assert_match "Commands:", shell_output("#{bin}/opencode --help 2>&1")
+    assert_match "opencode", shell_output("#{bin}/opencode models")
   end
 end
