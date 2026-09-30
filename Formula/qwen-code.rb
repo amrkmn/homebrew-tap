@@ -33,6 +33,10 @@ class QwenCode < Formula
     qwen_code.glob("node_modules/@qwen-code/audio-capture/prebuilds/*").each do |dir|
       rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}"
     end
+
+    (qwen_code/"vendor/landlock-run").glob("*").each do |dir|
+      rm_r(dir) if dir.basename.to_s != "#{arch}-#{os}"
+    end
   end
 
   test do
