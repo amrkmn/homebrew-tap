@@ -10,6 +10,13 @@ class Opencode < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 arm64_tahoe:  "bf85b667fc034b9c3c308e1e9a7c45750c680103bb3bcbb4fb4a19684959faf0"
+    sha256 arm64_linux:  "ac808a0a63b6279cd34784eab780b75737837b5759d4f776825e9e0f5b44bbf5"
+    sha256 x86_64_linux: "3ad5bfaab97f5a407875a62121cf27284147c34cd07eafcba6ea103ce7c91dbb"
+  end
+
   depends_on "bun" => :build
   depends_on "python@3.14" => :build
   depends_on "rust" => :build
