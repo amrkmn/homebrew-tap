@@ -11,6 +11,13 @@ class OpencodeAT1 < Formula
     strategy :github_releases
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/amrkmn/tap"
+    sha256 arm64_tahoe:  "3387ba490698f2f6899b81b79fe8b16a92e610b0f2ec8fddd1bf0eb4715d869a"
+    sha256 arm64_linux:  "7bf92128882f88a7058f9b71b87327e8a5651831ee4afaf41914fbd6f7250a97"
+    sha256 x86_64_linux: "57ac42864ba7c8494e8a0437e2b579bc8b805f3f1b9bd7696887a218826ccec2"
+  end
+
   keg_only :versioned_formula
 
   depends_on "bun" => :build
