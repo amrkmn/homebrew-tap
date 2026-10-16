@@ -1,8 +1,8 @@
 class ForgejoCli < Formula
   desc "CLI tool for interacting with Forgejo"
   homepage "https://codeberg.org/forgejo-contrib/forgejo-cli"
-  url "https://codeberg.org/forgejo-contrib/forgejo-cli/archive/v0.6.0.tar.gz"
-  sha256 "8b91194cb1886f253261a4567ee6f83aa34b05a9637644793f88b40b7110322a"
+  url "https://codeberg.org/forgejo-contrib/forgejo-cli/archive/v0.7.0.tar.gz"
+  sha256 "748ce60eb18e72af83ef3956910933b1e091abf673f12ff9777aea214f6eae40"
   license any_of: ["Apache-2.0", "MIT"]
   head "https://codeberg.org/forgejo-contrib/forgejo-cli.git", branch: "main"
 
