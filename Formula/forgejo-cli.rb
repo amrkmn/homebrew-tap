@@ -8,9 +8,9 @@ class ForgejoCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256               arm64_tahoe:  "d943c9627239c5fa59c75c7c337c85ca1e4e46edd9f8fb0ca5e60db2a61391cd"
-    sha256 cellar: :any, arm64_linux:  "57196aa9da239dfc44f34fbfcd95e5d76e020f055cee71060a027066f6b619db"
-    sha256 cellar: :any, x86_64_linux: "f524aaaf17357f1da7746c4e9fb90c0df3d847060d425e71dc72293ba79cdc7b"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "7c69c0f2fd7c09b9a3d0689f857dcb94f09c99f794b05750ea7196ed8d02419e"
+    sha256 cellar: :any,                 arm64_linux:  "f88e99a8c153965d10385ad54c305edada639879ca055e2f2edd1df10dd918b0"
+    sha256 cellar: :any,                 x86_64_linux: "7d6970715fa56d3d386ef95896fa71c86ea3964acd1553f5f8790d6897d1f71d"
   end
 
   depends_on "pkgconf" => :build
