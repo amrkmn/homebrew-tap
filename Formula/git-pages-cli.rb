@@ -8,9 +8,9 @@ class GitPagesCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "3be242a4f86b4813fb2f1007ab6f13e7fe881104bdbffc96d5f21158fddbdb05"
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "fc48d0d520d7ed79528936effe97b6c8a1f9ed6ebbfc7fdcce32d19622d91bac"
-    sha256 cellar: :any,                 x86_64_linux: "4d1651fe8c9c94a57cb09e6b5b4d0b3e6dc995dcc1ac4691c96dfe50cca1fb19"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "8096b962fa9917b8a519414999e1870eda44dcd80ed8112f77ba81e4b607ad52"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "741b8783b13dee73f6c08bbd585ecf6e2f3db2cfe6c888d19e9539f80d553198"
+    sha256 cellar: :any,                 x86_64_linux: "abdd5cc834273a86102db6d12c3ae389faf88d61d54e8386802c0b110b2b78a7"
   end
 
   depends_on "go" => :build
