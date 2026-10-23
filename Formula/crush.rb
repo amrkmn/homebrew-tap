@@ -1,8 +1,8 @@
 class Crush < Formula
   desc "Glamourous AI coding agent for your favourite terminal"
   homepage "https://charm.sh/crush"
-  url "https://registry.npmjs.org/@charmland/crush/-/crush-0.98.1.tgz"
-  sha256 "6ddd7163a490c3262fb939b15eaa2e1bbf551957a4f1f5ea40a5cb6f1ade17be"
+  url "https://registry.npmjs.org/@charmland/crush/-/crush-0.98.2.tgz"
+  sha256 "4befab0a4116c0bf8025ce1ea95d2335c3bf9ba2469b4ee0406274b6eb525f77"
   license "FSL-1.1-MIT"
 
   bottle do
