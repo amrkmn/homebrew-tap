@@ -18,18 +18,18 @@ class Opencode < Formula
   end
 
   depends_on "bun" => :build
-  depends_on "python@3.14" => :build
+  depends_on "python@3.15" => :build
   depends_on "rust" => :build
   depends_on "zig@0.16" => :build
   depends_on "ripgrep"
 
   on_linux do
-    depends_on "icu4c@78"
+    depends_on "icu4c@79"
   end
 
   resource "opencode-pty" do
-    url "https://github.com/anomalyco/opencode-pty/archive/refs/tags/v0.2.0.tar.gz"
-    sha256 "7fc1d1ebf4b74cd1b2a83f059afa29a899990b85cf078e73b703004370a52754"
+    url "https://github.com/anomalyco/opencode-pty/archive/refs/tags/v0.3.1.tar.gz"
+    sha256 "101efcfde719cd9ead649d1fc1e1c31a31e89c854bf63b9cd2e977a7661f18a0"
 
     livecheck do
       url "https://raw.githubusercontent.com/anomalyco/opencode/refs/tags/v#{LATEST_VERSION}/packages/cli/package.json"
@@ -61,10 +61,24 @@ class Opencode < Formula
     end
   end
 
+  # Ghostty's `translate_c` dependency pins this archive in its build.zig.zon.
+  # Zig fails to fetch it on macOS CI with `HttpHeadersOversize`.
+  resource "aro" do
+    url "https://github.com/vancluever/arocc/archive/ecbc5c799574e0da2758a961b12efa586007f03c.tar.gz"
+    sha256 "aa54487bd727e8fa36744ff0a824dedb2f4ca45f4c2d4d9d2437cf5fd3d0ad1a"
+
+    livecheck do
+      skip "pinned commit"
+    end
+  end
+
   def install
     # Build the persistent PTY helper from source instead of embedding the prebuilt npm binary
     (buildpath/"ghostty").install resource("ghostty")
     ENV["GHOSTTY_SOURCE_DIR"] = buildpath/"ghostty"
+    cd "ghostty" do
+      system "zig", "fetch", resource("aro").cached_download
+    end
     resource("opencode-pty").stage do
       system "cargo", "install", *std_cargo_args(root: buildpath/"opencode-pty")
     end
@@ -85,7 +99,7 @@ class Opencode < Formula
       bin.install Pathname.pwd.glob("dist/cli-*/bin/opencode").first
     end
 
-    generate_completions_from_executable(bin/"opencode", "--completions")
+    generate_completions_from_executable(bin/"opencode", shell_parameter_format: "--completions=")
   end
 
   test do
