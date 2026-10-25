@@ -37,6 +37,10 @@ class QwenCode < Formula
     (qwen_code/"vendor/landlock-run").glob("*").each do |dir|
       rm_r(dir) if dir.basename.to_s != "#{arch}-#{os}"
     end
+
+    (qwen_code/"opentui-assets/@opentui").glob("core-*").each do |dir|
+      rm_r(dir) if dir.basename.to_s != "core-#{os}-#{arch}"
+    end
   end
 
   test do
