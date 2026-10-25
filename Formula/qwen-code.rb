@@ -23,6 +23,7 @@ class QwenCode < Formula
 
     # Remove incompatible pre-built binaries
     rm_r(qwen_code/"vendor/ripgrep")
+    rm_r(qwen_code/"opentui-assets") if (qwen_code/"opentui-assets").exist?
 
     os = OS.mac? ? "darwin" : "linux"
     arch = Hardware::CPU.intel? ? "x64" : "arm64"
@@ -36,10 +37,6 @@ class QwenCode < Formula
 
     (qwen_code/"vendor/landlock-run").glob("*").each do |dir|
       rm_r(dir) if dir.basename.to_s != "#{arch}-#{os}"
-    end
-
-    (qwen_code/"opentui-assets/@opentui").glob("core-*").each do |dir|
-      rm_r(dir) if dir.basename.to_s != "core-#{os}-#{arch}"
     end
   end
 
