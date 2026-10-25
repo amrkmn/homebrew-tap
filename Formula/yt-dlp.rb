@@ -81,7 +81,7 @@ class YtDlp < Formula
   end
 
   test do
-    system bin/"yt-dlp", "https://raw.githubusercontent.com/Homebrew/brew/refs/heads/master/Library/Homebrew/test/support/fixtures/test.gif"
+    system bin/"yt-dlp", "https://raw.githubusercontent.com/Homebrew/brew/refs/heads/main/Library/Homebrew/test/support/fixtures/test.gif"
     system bin/"yt-dlp", "--simulate", "https://x.com/X/status/1922008207133671652"
   end
 end
