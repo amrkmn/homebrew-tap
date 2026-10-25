@@ -9,9 +9,9 @@ class YtDlp < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "572231949134166d83591727d86e2281fc82418ed70ff682b199be48a7ed0ed5"
-    sha256 cellar: :any,                 arm64_linux:  "6d94f126f0444076f6f09745ba12c6896de9b498035fde656a06910a3b9e51e8"
-    sha256 cellar: :any,                 x86_64_linux: "9d95b931edf6ad664137a1fc30ca70ebce11c196d15c49016fc01da5fc68ebca"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "668576aa4cb700cb4f24624c41b9cb75b1c3b46fc7bc52947e329af2b6ca1a12"
+    sha256 cellar: :any,                 arm64_linux:  "ea20a87a05df19d487d407ccf81afac95fb820ffdd27aa6ad416267063e9c1f1"
+    sha256 cellar: :any,                 x86_64_linux: "07dbddb5a4062207ffdc0d31dd622b79349217a444e61a8037011c888d0b201d"
   end
 
   head do
