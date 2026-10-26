@@ -6,6 +6,8 @@ class YtDlp < Formula
   url "https://files.pythonhosted.org/packages/06/13/d2ea252871826205dc4965cb70e6037ab93697fcabf4feda49fe981f6da0/yt_dlp-2026.10.21.tar.gz"
   sha256 "cbf748d7d17cd37647c4b9f07b6c25f24384bfd4361407ee5ec519e753d22539"
   license "Unlicense"
+  revision 1
+  compatibility_version 1
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
@@ -21,11 +23,13 @@ class YtDlp < Formula
   end
 
   depends_on "certifi"
+  depends_on "cffi"
   depends_on "deno"
-  depends_on "python@3.14"
+  depends_on "pycparser"
+  depends_on "python@3.15"
 
-  pypi_packages package_name:     "yt-dlp[default]",
-                exclude_packages: "certifi"
+  pypi_packages package_name:     "yt-dlp[default,curl-cffi]",
+                exclude_packages: %w[certifi cffi pycparser]
 
   resource "brotli" do
     url "https://files.pythonhosted.org/packages/cf/81/1546c983678a9b4e77cb4718eaedd1b2caf24a6cdbf1eb8775938d22aff7/brotli-1.2.1.tar.gz"
@@ -35,6 +39,11 @@ class YtDlp < Formula
   resource "charset-normalizer" do
     url "https://files.pythonhosted.org/packages/33/1c/f41d4e74c28ab327ff3acd36053f7ea506c55872d7a90b0fa71aa3ab0c89/charset_normalizer-3.5.2.tar.gz"
     sha256 "39de2a259fc954455c57274dc94c79d5842774e1247a016aff30bc0efed0f4ef"
+  end
+
+  resource "curl-cffi" do
+    url "https://files.pythonhosted.org/packages/82/e1/730125c43e3e331d98e17af3cb310ba526b3f1101b7635ca23d976ebfcf5/curl_cffi-0.16.3.tar.gz"
+    sha256 "d15d0c2a35f2d75bec430c28946c2a833f421c85773bdb0795182cc5c515665b"
   end
 
   resource "idna" do
@@ -72,8 +81,10 @@ class YtDlp < Formula
     sha256 "d5fa1639f63b5c4af8d932495f60689d5370f1a095782c944f7f62a303eb104e"
   end
 
+  deny_network_access! :postinstall
+
   def install
-    system "gmake", "lazy-extractors", "pypi-files" if build.head?
+    system "make", "lazy-extractors", "pypi-files" if build.head?
     virtualenv_install_with_resources
     bash_completion.install libexec/"share/bash-completion/completions/yt-dlp"
     zsh_completion.install libexec/"share/zsh/site-functions/_yt-dlp"
