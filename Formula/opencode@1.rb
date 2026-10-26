@@ -4,6 +4,7 @@ class OpencodeAT1 < Formula
   url "https://github.com/anomalyco/opencode/archive/refs/tags/v1.19.4.tar.gz"
   sha256 "2e553ed005b2df4a7efb9edd26db8fc3caafb1b4dfc3c5c3869192334584d8bb"
   license "MIT"
+  revision 1
 
   livecheck do
     url :stable
@@ -21,7 +22,7 @@ class OpencodeAT1 < Formula
   keg_only :versioned_formula
 
   depends_on "bun" => :build
-  depends_on "python@3.14" => :build
+  depends_on "python@3.15" => :build
   depends_on "ripgrep"
 
   on_linux do
