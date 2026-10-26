@@ -10,9 +10,9 @@ class Ttconv < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "6d7b1a77208d0c08c4d74e80bcca6db3fb019b13302b13cb7ee03e71f017e9bf"
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "cc5e895e572cc695ae604175ef0ff21e96d5b5b949d3c39e4ce301a1d6174d0a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "7656f33bc148f0a0e292baf9c2d5a50f0947e847cb03082d78057ac9a1621635"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "a1cf17bf8c494c4bb5fd901045f48fa0d0445e1908c2f6ea9a067470f4354c5a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "0f621e5f09b5fc1d0f4786ac92b81d836f99c02e5cb9a13c241b555acc0e6196"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "c8b0412a4e9f520f33d3d8eab3625eba65db35ce41c71a753d4dbdc99152d002"
   end
 
   depends_on "python@3.15"
