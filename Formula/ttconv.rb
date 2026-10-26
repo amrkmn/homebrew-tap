@@ -6,6 +6,7 @@ class Ttconv < Formula
   url "https://files.pythonhosted.org/packages/fd/d4/1f93adb12852678c02d1ad4805a190055cb4d32d89d4d2d0cc0163956ab0/ttconv-1.2.3.tar.gz"
   sha256 "74c8e12e5a591e42051606c27795835b663ee955bcd571835e7d884567335d74"
   license "BSD-2-Clause"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
@@ -14,7 +15,7 @@ class Ttconv < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "7656f33bc148f0a0e292baf9c2d5a50f0947e847cb03082d78057ac9a1621635"
   end
 
-  depends_on "python@3.14"
+  depends_on "python@3.15"
 
   def install
     virtualenv_install_with_resources
