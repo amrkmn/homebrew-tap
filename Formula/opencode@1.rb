@@ -26,7 +26,7 @@ class OpencodeAT1 < Formula
   depends_on "ripgrep"
 
   on_linux do
-    depends_on "icu4c@78"
+    depends_on "icu4c@79"
   end
 
   deny_network_access! :test
