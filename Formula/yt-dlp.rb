@@ -7,7 +7,6 @@ class YtDlp < Formula
   sha256 "cbf748d7d17cd37647c4b9f07b6c25f24384bfd4361407ee5ec519e753d22539"
   license "Unlicense"
   revision 1
-  compatibility_version 1
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
