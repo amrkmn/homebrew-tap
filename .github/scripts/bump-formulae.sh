@@ -33,10 +33,20 @@ jq -c '.[] | select(.status != "skipped") | select(.version.latest != .version.c
         continue
     fi
 
-    if brew bump-formula-pr \
-        --no-audit --no-browse --force \
-        --version="$new_ver" \
-        "amrkmn/tap/${name}" 2>&1; then
+    # Extract livechecked resources if present
+    resource_versions="$(echo "$formula" | jq -c '[.resources[]? | select(.status != "skipped" and .version.latest != null) | {name: .resource, current_version: .version.current, latest_version: .version.latest}]')"
+
+    bump_args=(
+        --no-audit --no-browse --force
+        --install-dependencies
+        --version="$new_ver"
+    )
+
+    if [[ -n "$resource_versions" && "$resource_versions" != "[]" ]]; then
+        bump_args+=( "--resource-versions=${resource_versions}" )
+    fi
+
+    if brew bump-formula-pr "${bump_args[@]}" "amrkmn/tap/${name}" 2>&1; then
         echo "✅ Bumped $name to $new_ver"
         BUMPED="${BUMPED}${name}@${new_ver}\n"
     else

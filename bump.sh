@@ -25,7 +25,18 @@ then
   exit 0
 fi
 
-brew bump-formula-pr \
-  --no-audit --no-browse --force \
-  --version="${version}" \
-  "amrkmn/tap/${name}"
+bump_args=(
+  --no-audit --no-browse --force
+  --install-dependencies
+  --version="${version}"
+)
+
+# Check for livechecked resources if available
+if livecheck_out="$(brew livecheck --quiet --resources --json "amrkmn/tap/${name}" 2>/dev/null)"; then
+  resource_versions="$(echo "${livecheck_out}" | jq -c '.[0] | [.resources[]? | select(.status != "skipped" and .version.latest != null) | {name: .resource, current_version: .version.current, latest_version: .version.latest}]' 2>/dev/null || true)"
+  if [[ -n "$resource_versions" && "$resource_versions" != "[]" ]]; then
+    bump_args+=( "--resource-versions=${resource_versions}" )
+  fi
+fi
+
+brew bump-formula-pr "${bump_args[@]}" "amrkmn/tap/${name}"
