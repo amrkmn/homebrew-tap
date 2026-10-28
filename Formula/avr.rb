@@ -3,8 +3,8 @@ class Avr < Formula
 
   desc "Avrea command-line client"
   homepage "https://avrea.com/"
-  url "https://files.pythonhosted.org/packages/b4/33/b6db3968f2bc67e5366ba86d4d42301b1a07ca8626df445830b2c8d402e3/avr_cli-0.4.1.tar.gz"
-  sha256 "ff2a637c0b3ff13e855e301c4da3f1cb81afe3b24036946a00eebc49db8a6cca"
+  url "https://files.pythonhosted.org/packages/92/ca/b699a37b1a599bf6e0319a0e4a2cc76950de181517f93910b0242bf98e8f/avr_cli-0.5.0.tar.gz"
+  sha256 "f81a3346620a6b089908daa8cc204a93d4246ad86bfe9a85e57a11279328a970"
   license "Apache-2.0"
 
   bottle do
