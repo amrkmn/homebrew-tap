@@ -9,9 +9,9 @@ class Avr < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "6a0fd5e21e08e58336e15e2e97b1cb13c2e534e51d63be1fec715b2d55a20a81"
-    sha256 cellar: :any,                 arm64_linux:  "be747bb1ef6353d96f954c05ae3c34c1d9859278fb0c1e0857ae3a57f84d552a"
-    sha256 cellar: :any,                 x86_64_linux: "4170b6ad1374ee32d4861c00a431533ea544dd345836705d0c26c0c5cd1c9aea"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "db5685415a946c59b733e8e7c037a0f0f5a356c10a438ef14746adf0f1df9177"
+    sha256 cellar: :any,                 arm64_linux:  "bbcabce306310ea476e6bab0266d80d4cdc87d42acc9480fa5e73b5ca5b4aa7c"
+    sha256 cellar: :any,                 x86_64_linux: "44f4493214b0066ee73fa7c6f1a588bc1c0d3c74ea851b9158899f0a8a867762"
   end
 
   depends_on "certifi"
