@@ -26,6 +26,10 @@ class YtDlp < Formula
   depends_on "pycparser"
   depends_on "python@3.15"
 
+  on_macos do
+    depends_on "pkgconf" => :build
+  end
+
   pypi_packages package_name:     "yt-dlp[default,curl-cffi]",
                 exclude_packages: %w[certifi cffi pycparser]
 
