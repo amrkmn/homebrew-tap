@@ -13,9 +13,9 @@ class OpencodeAT1 < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 arm64_tahoe:  "a7caab9c43a5d1584d530e82b2d80a9f92b89cd91d2e5a95d1494cbf744d1c3d"
-    sha256 arm64_linux:  "8f6be7413e09f47b240699fc35841cb48b1f2f3fd44bf013ee5866b5b1da58a1"
-    sha256 x86_64_linux: "e46ce96f8154f14c108ce01a142f16aa2d84ec096c16cdcfb985676f60752f45"
+    sha256 arm64_tahoe:  "7d94ba1f3988059818389cd266e49c8b9db9d4bfc9e482c00bf83e23592fee51"
+    sha256 arm64_linux:  "03c6956ca922ec5c9ea1298b7ff400bf2a9b830d04234ae4728e4fa660921ac2"
+    sha256 x86_64_linux: "2ace67404f5ff81c9f6a7661f54f7f5d65c28f88285808014069a1f0213de539"
   end
 
   keg_only :versioned_formula
