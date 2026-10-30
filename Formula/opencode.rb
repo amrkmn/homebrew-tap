@@ -27,18 +27,6 @@ class Opencode < Formula
     depends_on "icu4c@79"
   end
 
-  resource "opencode-pty" do
-    url "https://github.com/anomalyco/opencode-pty/archive/refs/tags/v0.3.1.tar.gz"
-    sha256 "101efcfde719cd9ead649d1fc1e1c31a31e89c854bf63b9cd2e977a7661f18a0"
-
-    livecheck do
-      url "https://raw.githubusercontent.com/anomalyco/opencode/refs/tags/v#{LATEST_VERSION}/packages/cli/package.json"
-      strategy :json do |json|
-        json.dig("dependencies", "@opencode-ai/pty")
-      end
-    end
-  end
-
   # opencode-pty's build.rs requires a git checkout of the revision in its `ghostty-revision` file
   resource "ghostty" do
     url "https://github.com/ghostty-org/ghostty.git",
@@ -46,18 +34,8 @@ class Opencode < Formula
     version "ab0b9da9e88fcb4b0533a1854e84628f663930af"
 
     livecheck do
-      url "https://raw.githubusercontent.com/anomalyco/opencode/refs/tags/v#{LATEST_VERSION}/packages/cli/package.json"
+      url "https://raw.githubusercontent.com/anomalyco/opencode/refs/tags/v#{LATEST_VERSION}/packages/process-daemon/ghostty-revision"
       regex(/^(\h{40})$/i)
-      strategy :json do |json, regex|
-        pty_version = json.dig("dependencies", "@opencode-ai/pty")
-        next if pty_version.blank?
-
-        revision_url = "https://raw.githubusercontent.com/anomalyco/opencode-pty/refs/tags/v#{pty_version}/ghostty-revision"
-        ghostty_revision = Homebrew::Livecheck::Strategy.page_content(revision_url)[:content]
-        next if ghostty_revision.blank?
-
-        ghostty_revision[regex, 1]
-      end
     end
   end
 
@@ -79,9 +57,7 @@ class Opencode < Formula
     cd "ghostty" do
       system "zig", "fetch", resource("aro").cached_download
     end
-    resource("opencode-pty").stage do
-      system "cargo", "install", *std_cargo_args(root: buildpath/"opencode-pty")
-    end
+    system "cargo", "install", *std_cargo_args(root: buildpath/"opencode-pty", path: "packages/process-daemon")
     ENV["OPENCODE_PTY_BIN"] = buildpath/"opencode-pty/bin/opencode-pty"
 
     ENV["OPENCODE_VERSION"] = version.to_s
