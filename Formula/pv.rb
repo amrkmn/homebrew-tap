@@ -12,9 +12,9 @@ class Pv < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 arm64_tahoe:  "2a07ff8458ca273b70b9f866ac8d55ba67bc5b06bb2b5516a1bb2bbdf355dc60"
-    sha256 arm64_linux:  "626f1f34e3eee22a114ddf419d71fd454f56b77df2eac0a25fce9133dfcb4501"
-    sha256 x86_64_linux: "5c415aab5d6b8aace8c0f5e970356eac140c77a3288daeb5b70ddbde2fceea0e"
+    sha256 arm64_tahoe:  "51a106222a0e89e62829cb68bf39ea9346f79a974c70fbf66164c9245d8820d6"
+    sha256 arm64_linux:  "5061e8cd26d677ff93473e497a5a697f0f32384efaeb47b1e8ebbf732e7c9fe5"
+    sha256 x86_64_linux: "7454bcdb00af8c5871a893d7edd96a0e78d32bad506685e04a6a564d3017f408"
   end
 
   uses_from_macos "ncurses"
