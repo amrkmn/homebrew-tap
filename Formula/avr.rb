@@ -3,8 +3,8 @@ class Avr < Formula
 
   desc "Avrea command-line client"
   homepage "https://avrea.com/"
-  url "https://files.pythonhosted.org/packages/92/ca/b699a37b1a599bf6e0319a0e4a2cc76950de181517f93910b0242bf98e8f/avr_cli-0.5.0.tar.gz"
-  sha256 "f81a3346620a6b089908daa8cc204a93d4246ad86bfe9a85e57a11279328a970"
+  url "https://files.pythonhosted.org/packages/5c/65/07fe3f887403141fceb655176978ab44f1e9b1ba84e00b191d08e7bd58d4/avr_cli-0.6.0.tar.gz"
+  sha256 "9259bc0161382c358f0f286c1de9007d0f0e02317ba9e78e2457b2ef06eaf158"
   license "Apache-2.0"
 
   bottle do
@@ -22,8 +22,8 @@ class Avr < Formula
                 exclude_packages: %w[certifi pydantic]
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/a9/d2/f4d173e22df740bc37b1db102b386ba719b66e95b0f0d751f556b387e6d2/anyio-4.15.1.tar.gz"
-    sha256 "9f28306018cbd6d329e64a36d58256edff76dd996fe423bc957326e578b82a94"
+    url "https://files.pythonhosted.org/packages/a1/98/7e457a3b014976887a050561955c0b76e1e7e2d6e27b78ecef2ef80518f2/anyio-4.16.0.tar.gz"
+    sha256 "59bb03251907983d1603d27c3087ddb1e93299ea2163adcdba37899a4fb12ffb"
   end
 
   resource "click" do
@@ -52,8 +52,8 @@ class Avr < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/1a/43/8c4b5fe23f0e119cf4e1b16c2d16240ab9057cdbb138568c91d5a48abf81/platformdirs-4.13.6.tar.gz"
-    sha256 "211d176e24674b5895dedf9021c262bcf9fad008a70610bfb147d4a8d6d8fe1b"
+    url "https://files.pythonhosted.org/packages/d7/9a/8475be631fb33ca1466915e70fd594c42a4e84b512db650eaa14f90fe75d/platformdirs-4.14.5.tar.gz"
+    sha256 "32e9921db7385aa8169bee4fe9501923e5715ba9fb7ea3b9c69b0d8e0639f7a1"
   end
 
   resource "prettytable" do
@@ -61,9 +61,19 @@ class Avr < Formula
     sha256 "439217116152244369caf3d9f1caf2f9fe29b03bd79e88d2928c8e718c95d680"
   end
 
+  resource "segno" do
+    url "https://files.pythonhosted.org/packages/1c/2e/b396f750c53f570055bf5a9fc1ace09bed2dff013c73b7afec5702a581ba/segno-1.6.6.tar.gz"
+    sha256 "e60933afc4b52137d323a4434c8340e0ce1e58cec71439e46680d4db188f11b3"
+  end
+
   resource "wcwidth" do
     url "https://files.pythonhosted.org/packages/ea/01/e5ac23733628a6bbb91913a765fcf55ee8070d8d991bc88fdaaf805052c7/wcwidth-0.9.4.tar.gz"
     sha256 "fd8d57d3cdfe570e3265c8fab1885c24e34ef40889c0759c0c304a19e9835954"
+  end
+
+  resource "websockets" do
+    url "https://files.pythonhosted.org/packages/75/79/590c5f0cc7d1661195aeefccb0e342b79f4c77d368d526d028821a390332/websockets-17.4.tar.gz"
+    sha256 "09d3939b70df0c8ad2da145ebd50978bccaee1d565e838b0e7921a34d38571eb"
   end
 
   def install
