@@ -12,9 +12,9 @@ class Nub < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "ba75bd996e46e764e5c80f7e72fbb84b2027fe599f6e26521a8f7eb12b764fbd"
-    sha256 cellar: :any,                 arm64_linux:  "f21a92e8b037fd8671856f63855baaed1f0a377f21cb0c6823209bf43bc30510"
-    sha256 cellar: :any,                 x86_64_linux: "b4fb7629e064a30b2042aaa88b1757ebb9da78b83f1d44c16b448fa694a7d654"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "65bbbf09d7efd4cec0099397ec3f2b2eaa997a035084344384ea0b72b243b8ee"
+    sha256 cellar: :any,                 arm64_linux:  "697dcdf4b8fe3cf3a1ad786a602623c53bd937071587c0435be24f29ca973023"
+    sha256 cellar: :any,                 x86_64_linux: "9f47633c629cf47aa519eb388d4ddd1e727cf688fabb29e6083d63fe9283b356"
   end
 
   depends_on "cmake" => :build
