@@ -7,9 +7,9 @@ class Qmd < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    sha256 cellar: :any, arm64_tahoe:  "e63d2ea6d3d05e12062bc90b628156e342dfa31020af0872eb8fc63967c8e24e"
-    sha256 cellar: :any, arm64_linux:  "62fdadc217b4fb200f93c4d95aa6477a0f70dabd9334064d514da63d073a4dc6"
-    sha256 cellar: :any, x86_64_linux: "7828563a3cb4a554230a1410a3464f4b13894a59770785df99ceccad33ce1114"
+    sha256 cellar: :any, arm64_tahoe:  "6699c97193d5ed71897a10f318c114c0966a200b8818573e2c20207e3f5e75b7"
+    sha256 cellar: :any, arm64_linux:  "db50805441e4c10f1586823b4c1a13e8c258cdf099c8436120a21883f654a38b"
+    sha256 cellar: :any, x86_64_linux: "4fc4f4f8370fcfdd59ab12634c48ce75709bc83fb09eec244b26c0da4085f7e6"
   end
 
   depends_on "node"
