@@ -1,8 +1,8 @@
 class Qmd < Formula
   desc "On-device hybrid search engine for markdown notes, docs, and knowledge bases"
   homepage "https://github.com/tobi/qmd"
-  url "https://registry.npmjs.org/@tobilu/qmd/-/qmd-2.8.3.tgz"
-  sha256 "2e60829913a0c646234a905cefd61043167a1392fdcfd19bc54f890af89ca0f0"
+  url "https://registry.npmjs.org/@tobilu/qmd/-/qmd-2.9.0.tgz"
+  sha256 "436ce43f4dd9e64ee734c86964195aa049f0abc34ab9ed6d90608ad4b20665d4"
   license "MIT"
 
   bottle do
