@@ -1,11 +1,10 @@
 class Avr < Formula
-  include Language::Python::Virtualenv
-
   desc "Avrea command-line client"
   homepage "https://avrea.com/"
-  url "https://files.pythonhosted.org/packages/5c/65/07fe3f887403141fceb655176978ab44f1e9b1ba84e00b191d08e7bd58d4/avr_cli-0.6.0.tar.gz"
-  sha256 "9259bc0161382c358f0f286c1de9007d0f0e02317ba9e78e2457b2ef06eaf158"
+  url "https://github.com/avrea-com/cli/archive/refs/tags/v0.10.1.tar.gz"
+  sha256 "797e7eb791635affdb3d0a2bce686b6739ae0474b86dab4146b7a4789bdcbafc"
   license "Apache-2.0"
+  head "https://github.com/avrea-com/cli.git", branch: "main"
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
@@ -14,72 +13,18 @@ class Avr < Formula
     sha256 cellar: :any,                 x86_64_linux: "03045466868e076079d4814c1738197c9202b82ce478256fb2b9d31777fbb4bf"
   end
 
-  depends_on "certifi"
-  depends_on "pydantic"
-  depends_on "python@3.15"
-
-  pypi_packages package_name:     "avr-cli",
-                exclude_packages: %w[certifi pydantic]
-
-  resource "anyio" do
-    url "https://files.pythonhosted.org/packages/a1/98/7e457a3b014976887a050561955c0b76e1e7e2d6e27b78ecef2ef80518f2/anyio-4.16.0.tar.gz"
-    sha256 "59bb03251907983d1603d27c3087ddb1e93299ea2163adcdba37899a4fb12ffb"
-  end
-
-  resource "click" do
-    url "https://files.pythonhosted.org/packages/c7/0e/7fa0ef50764b67090eca4114772a2abf8b6148198475e54c660b97caeee6/click-8.5.0.tar.gz"
-    sha256 "ba0d2089de75ea0310e2dde03160e6ca10009947fb95a182f9b54021bb272e34"
-  end
-
-  resource "h11" do
-    url "https://files.pythonhosted.org/packages/01/ee/02a2c011bdab74c6fb3c75474d40b3052059d95df7e73351460c8588d963/h11-0.16.0.tar.gz"
-    sha256 "4e35b956cf45792e4caa5885e69fba00bdbc6ffafbfa020300e549b208ee5ff1"
-  end
-
-  resource "httpcore" do
-    url "https://files.pythonhosted.org/packages/06/94/82699a10bca87a5556c9c59b5963f2d039dbd239f25bc2a63907a05a14cb/httpcore-1.0.9.tar.gz"
-    sha256 "6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8"
-  end
-
-  resource "httpx" do
-    url "https://files.pythonhosted.org/packages/b1/df/48c586a5fe32a0f01324ee087459e112ebb7224f646c0b5023f5e79e9956/httpx-0.28.1.tar.gz"
-    sha256 "75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc"
-  end
-
-  resource "idna" do
-    url "https://files.pythonhosted.org/packages/f5/08/8eea9d4b8302028f3abb2c0813953f7aec26d33b7a8960ed760e65ff29fa/idna-3.20.tar.gz"
-    sha256 "a7db850025b95ded1eae8a46181a1a6c56c92c96f0e2b005d9ff8dc0210cab44"
-  end
-
-  resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/d7/9a/8475be631fb33ca1466915e70fd594c42a4e84b512db650eaa14f90fe75d/platformdirs-4.14.5.tar.gz"
-    sha256 "32e9921db7385aa8169bee4fe9501923e5715ba9fb7ea3b9c69b0d8e0639f7a1"
-  end
-
-  resource "prettytable" do
-    url "https://files.pythonhosted.org/packages/81/74/ba08d81e668ccfe8658d7520a307e63c19862c08eb4ccb26f356c5239a7a/prettytable-3.18.0.tar.gz"
-    sha256 "439217116152244369caf3d9f1caf2f9fe29b03bd79e88d2928c8e718c95d680"
-  end
-
-  resource "segno" do
-    url "https://files.pythonhosted.org/packages/1c/2e/b396f750c53f570055bf5a9fc1ace09bed2dff013c73b7afec5702a581ba/segno-1.6.6.tar.gz"
-    sha256 "e60933afc4b52137d323a4434c8340e0ce1e58cec71439e46680d4db188f11b3"
-  end
-
-  resource "wcwidth" do
-    url "https://files.pythonhosted.org/packages/ea/01/e5ac23733628a6bbb91913a765fcf55ee8070d8d991bc88fdaaf805052c7/wcwidth-0.9.4.tar.gz"
-    sha256 "fd8d57d3cdfe570e3265c8fab1885c24e34ef40889c0759c0c304a19e9835954"
-  end
-
-  resource "websockets" do
-    url "https://files.pythonhosted.org/packages/75/79/590c5f0cc7d1661195aeefccb0e342b79f4c77d368d526d028821a390332/websockets-17.4.tar.gz"
-    sha256 "09d3939b70df0c8ad2da145ebd50978bccaee1d565e838b0e7921a34d38571eb"
-  end
+  depends_on "go" => :build
 
   def install
-    virtualenv_install_with_resources
+    ldflags = %W[
+      -X main.version=#{version}
+      -X main.commit=homebrew
+    ]
+    system "go", "build", *std_go_args(ldflags:), "./cmd/avr"
 
     generate_completions_from_executable(bin/"avr", shell_parameter_format: :click)
+    man1.install Dir["man/man1/*.1"]
+    bin.install_symlink bin/"avr" => "avr-cli"
   end
 
   test do
