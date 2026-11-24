@@ -1,8 +1,8 @@
 class Avr < Formula
   desc "Avrea command-line client"
   homepage "https://avrea.com/"
-  url "https://github.com/avrea-com/cli/archive/refs/tags/v0.10.1.tar.gz"
-  sha256 "797e7eb791635affdb3d0a2bce686b6739ae0474b86dab4146b7a4789bdcbafc"
+  url "https://github.com/avrea-com/cli/archive/refs/tags/v0.11.0.tar.gz"
+  sha256 "07d6dea2dafe81e66995a595cbf209f9d6b6a5e3ddcd73b3924144e8dec9cd5a"
   license "Apache-2.0"
   head "https://github.com/avrea-com/cli.git", branch: "main"
 
