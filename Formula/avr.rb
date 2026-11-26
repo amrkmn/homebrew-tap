@@ -8,10 +8,10 @@ class Avr < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/amrkmn/tap"
-    manifest_sha256 "0dff41636a5585c4e66fbcc6fc5dc1cca43d1c975d38f5d59cbdb86eaa1c0145"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "b4d2c7e7cf91c8ae8ddd5e16a005c63b5db9a4ce1c82091d50cb3034f03125f8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "c507133b9a1484389a720ae0cc2fa15936e8795ac26ae502a329cf250a4ce2f7"
-    sha256 cellar: :any,                 x86_64_linux: "6966bc99f54601e980a871125f48d7fcff12b507a71d1e54541bb8a8af55bd09"
+    manifest_sha256 "2ead1e4f6745b16b41f25de2f07b02904de36c0ae38ea0869619ac49407c25dd"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "afe13c1bc675ac4f138f72d9f94d778187f4aa8890fa20b9b6ff51ee1f9d8fcf"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "8d664b20684ec8bd05c087832f8681abadcc3f2f8860a1203987a602a8d28935"
+    sha256 cellar: :any,                 x86_64_linux: "96c243c680a4ac6a0e2c574e19b8c77d4be6953f4f32e0285417a6467efaa9a2"
   end
 
   depends_on "go" => :build
